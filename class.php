@@ -36,7 +36,7 @@ function calender( $ymd = ""){
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {
-                echo '<td>' . date('j', $date) . '</td>';
+                echo '<td><!--' . date('Y-m-d',$date) . '-->' . date('j', $date) . '</td>';
             } else {
                 echo '<td>&#160;</td>';
             }
