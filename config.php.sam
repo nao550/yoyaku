@@ -1,0 +1,5 @@
+
+$DBSV = "localhost";	// DB hostname.
+$DBNM = "crm";		// DB name.
+$DBUSER = "crm";	// DB user name.
+$DBPASS = "";		// DB user password.
