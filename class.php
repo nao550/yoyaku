@@ -40,12 +40,12 @@ function calender( $ymd = ""){
             if ($date) {
                 echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . '</strong><br />';
                 echo '<div class="classtime">';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-1">1限</a>：<br />';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-2">2限</a>：<br />';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-3">3限</a>：<br />';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-4">4限</a>：<br />';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-5">5限</a>：<br />';
-                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-6">6限</a>：';
+                echo '  <a href="additem.php?date=' . $date . '&class=1">1限</a>：<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=2">2限</a>：<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=3">3限</a>：<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=4">4限</a>：<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=5">5限</a>：<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=6">6限</a>：';
                 echo "\n";
             } else {
                 echo '<td>&#160;</td>';

@@ -1,5 +1,9 @@
 2014-07-16  IKENO Naoki  <nao@kyo-to.net>
 
+	* additem.php: 
+	additem.php を作成して、フォームまでは完成した
+	calender から additem.php へ渡す日付をunixtimeに変更した
+
 	* class.php (calender): 
 	万年カレンダーまで完成
 	時限ごとにGETのリンクも設定
