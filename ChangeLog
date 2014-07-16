@@ -1,0 +1,9 @@
+2014-07-16  IKENO Naoki  <nao@kyo-to.net>
+
+	* class.php (calender): 
+	万年カレンダーまで完成
+	時限ごとにGETのリンクも設定
+
+	next:
+	GETで送られてきた日付などを元に学生が登録するための画面の作成
+	
