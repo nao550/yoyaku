@@ -31,20 +31,28 @@ function calender( $ymd = ""){
     //カレンダーを表示する
     echo '<table id="yoyakucal">';
     //見出し
-    echo '<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>';
+    echo "<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>\n";
     //週のループ
     foreach ($data as $week) {
-        echo '<tr>';
+        echo "<tr>\n";
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {
                 echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . '</strong><br />';
-                echo '<div class="classtime">1限：<br />2限：<br />3限：<br />4限：<br />5限：<br />6限：</div></td>';
+                echo '<div class="classtime">';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-1">1限</a>：<br />';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-2">2限</a>：<br />';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-3">3限</a>：<br />';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-4">4限</a>：<br />';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-5">5限</a>：<br />';
+                echo '  <a href="additem.php?date=' . date('Y-m-d') . '-6">6限</a>：';
+                echo "\n";
             } else {
                 echo '<td>&#160;</td>';
+                echo "\n";
             }
         }
-        echo '</tr>';
+        echo "</tr>\n";
     }
     echo '</table>';
 }
