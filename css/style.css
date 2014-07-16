@@ -1,0 +1,73 @@
+
+body { 
+    margin: 0 auto;
+    width: 800px;
+    text-align: center;
+ }
+
+h1 { 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 140%;
+    font-weight: bold;
+ }
+
+strong { 
+    font-weight: bold;
+ }
+
+#caltitle { 
+    margin: 0 auto;
+    padding-top: 20px;
+    width: 700px;
+ }
+
+#caltitle_l { 
+    width: 250px;
+    float: left;
+    text-align: left;
+ }
+
+#caltitle_c { 
+    margin: 0 auto;
+    width: 200px;
+    float: left;
+    text-align: center;
+ }
+
+#caltitle_r { 
+    width: 200px;
+    float: right;
+    text-align: right;
+ }
+
+#yoyakucal { 
+    clear: both;
+    margin:0  auto;
+    width: 700px;
+    border-style: solid;
+    border-width: 1px;
+ }
+
+#yoyakucal th { 
+    width: 100px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;  
+ }
+
+#yoyakucal td { 
+    width: 100px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+  
+ }
+
+.classtime { 
+    border-style: solid;
+    border-width: 1px;
+    text-align: left;   
+
+ }
+
