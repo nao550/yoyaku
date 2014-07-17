@@ -22,6 +22,21 @@ if(! isset( $_GET['date'] )){
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">  
+  <script type="text/javascript">
+    <!--
+	function submit_click(){
+	    var DATE = document.forms.yoyaku_admit.date_p.value;
+	    var CLASS = document.forms.yoyaku_admit.classtime.value;
+	    if(window.confirm( DATE + CLASS + "限目で予約します。\n送信してよろしいですか？")){ 
+		window.alert('予約しました。');
+		return true; // 「OK」時は送信を実行
+	    }else{ 
+		return false; // 送信を中止
+	    }
+	}
+      -->
+  </script>
+
 </head>
 <body>
 
@@ -29,18 +44,18 @@ if(! isset( $_GET['date'] )){
 
   <!-- <?php echo "sql:" . $sql; ?> -->
 
-  <form action="additem.php" method="POST" id="yoyaku_admit">
+  <form action="additem.php" method="POST" id="yoyaku_admit" onSubmit="return submit_click()">
     <label>日付：</label>
-    <input type="text" name="date_p" size="15" readonly value="<?php echo date("Y年m月d日",$date) ?>" />
-    <input type="hidden" name="date" size="15" readonly value="<?php echo date("Y-m-d",$date) ?>" />
-    <input type="text" name="class" size="2" readonly value="<?php echo $class ?>" />
+    <input type="text" id="date_p" name="date_p" size="15" readonly value="<?php echo date("Y年m月d日",$date) ?>" />
+    <input type="hidden" id="date" name="date" size="15" readonly value="<?php echo date("Y-m-d",$date) ?>" />
+    <input type="text" id="classtime" name="class" size="2" readonly value="<?php echo $class ?>" />
     <label>時限目</label>
     <br />
     <label>学籍番号：</label>
-    <input type="text" name="studentid" />
+    <input type="text" id="studentid" name="studentid" />
     <br />
     <label>氏名：</label>
-    <input type="text" name="studentnm" />
+    <input type="text" id="studentnm" name="studentnm" />
     <br />
     <input type="hidden" name="mode" value="add">
     <input type="submit" value="予約">
