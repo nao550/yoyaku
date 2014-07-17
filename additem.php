@@ -20,21 +20,24 @@ if(! isset( $_GET['date'] )){
 </head>
 <body>
 
+  <h1 id="pagetitle">受講予約</h1>
+
   <!-- <?php   echo $_GET['date'] . " " . $date . " " . $class ; ?> -->
 
-  <form action="additem.php" method="POST">
-    <label>日付</label>
-    <input type="text" name="date" value="<?php echo date("Y年m月d日",$date) ?>" />
-    <input type="text" name="class" value="<?php echo $class ?>" />
+  <form action="additem.php" method="POST" id="yoyaku_admit">
+    <label>日付：</label>
+    <input type="text" name="date" size="15" readonly value="<?php echo date("Y年m月d日",$date) ?>" />
+    <input type="text" name="class" size="2" readonly value="<?php echo $class ?>" />
     <label>時限目</label>
     <br />
-    <label>学籍番号</label>
+    <label>学籍番号：</label>
     <input type="text" name="studentid" />
-    <label>氏名</label>
+    <br />
+    <label>氏名：</label>
     <input type="text" name="studentnm" />
     <br />
     <input type="submit" value="予約">
-    <input type="button" value="戻る" />
+    <a href="index.php"><input type="button" value="戻る" /></a>
   </form>
     
 

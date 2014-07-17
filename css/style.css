@@ -65,6 +65,14 @@ strong {
     line-height: 1.3em;  
  }
 
+#yoyaku_admit { 
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 300px;
+    text-align: left;
+    line-height: 2em;
+ }
+
 .classtime { 
     border-style: solid;
     border-width: 1px;
