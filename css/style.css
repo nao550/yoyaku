@@ -19,6 +19,7 @@ strong {
 #caltitle { 
     margin: 0 auto;
     padding-top: 20px;
+    padding-bottom: 20px;
     width: 700px;
  }
 
@@ -61,7 +62,7 @@ strong {
     border-style: solid;
     border-width: 1px;
     padding: 5px;
-  
+    line-height: 1.3em;  
  }
 
 .classtime { 
@@ -69,5 +70,6 @@ strong {
     border-width: 1px;
     text-align: left;   
     line-height: 1.3em;
+    padding: 5px;
  }
 

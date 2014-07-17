@@ -30,9 +30,13 @@ if( isset( $_GET['month'] )){
     <div id="caltitle">
       <div id="caltitle_l">
 <?php
-   $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
-   $last = date("Y年m月", $lastmonth);
-   echo '<a href="index.php?month=' . $lastmonth . '">' . $last. '</a>';
+       $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
+       $last = date("Y年m月", $lastmonth);
+   if( $month > time() ){ 
+       echo '<a href="index.php?month=' . $lastmonth . '">' . $last. '</a>';
+   } else {
+       echo $last;
+   }
 ?>
       </div>
 
