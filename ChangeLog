@@ -1,3 +1,9 @@
+2014-07-17  IKENO Naoki  <nao@kyo-to.net>
+
+	* additem.php: 
+	add_yoyaku() の実装
+	カレンダーから日時を指定して予約が登録されるようになった。
+
 2014-07-16  IKENO Naoki  <nao@kyo-to.net>
 
 	* additem.php: 
