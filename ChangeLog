@@ -1,3 +1,9 @@
+2014-07-18  IKENO Naoki  <nao@kyo-to.net>
+
+	* class.php (calender): 
+	CheckyYoyaku 追加、カレンダーに現在の予約人数表示ができるようになった。
+	ChgeckYoyaku関数はオブジェクト型のMySQL問合せで実装できた。
+
 2014-07-17  IKENO Naoki  <nao@kyo-to.net>
 
 	* additem.php: 

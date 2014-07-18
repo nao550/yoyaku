@@ -40,12 +40,12 @@ function calender( $ymd = ""){
             if ($date) {
                 echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . '</strong><br />';
                 echo '<div class="classtime">';
-                echo '  <a href="additem.php?date=' . $date . '&class=1">1限</a>：<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=2">2限</a>：<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=3">3限</a>：<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=4">4限</a>：<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=5">5限</a>：<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=6">6限</a>：';
+                echo '  <a href="additem.php?date=' . $date . '&class=1">1限</a>：' . CheckYoyaku( $date, 1 )  . '<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=2">2限</a>：' . CheckYoyaku( $date, 2 )  . '<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=3">3限</a>：' . CheckYoyaku( $date, 3 )  . '<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=4">4限</a>：' . CheckYoyaku( $date, 4 )  . '<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=5">5限</a>：' . CheckYoyaku( $date, 5 )  . '<br />';
+                echo '  <a href="additem.php?date=' . $date . '&class=6">6限</a>：' . CheckYoyaku( $date, 6 ) ;
                 echo "\n";
             } else {
                 echo '<td>&#160;</td>';
@@ -55,6 +55,27 @@ function calender( $ymd = ""){
         echo "</tr>\n";
     }
     echo '</table>';
+}
+
+function CheckYoyaku( $date, $class){
+   global $DBSV, $DBUSER , $DBPASS , $DBNM;
+
+   $date = date("Y-m-d", $date);
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+
+   $sql = "select studentid from yoyaku where date ='$date' and class ='$class'";
+
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+
+   $result = $mysql->query( $sql );
+
+   $num = $result->num_rows;
+
+   return $num;
+    
 }
 
 ?>
