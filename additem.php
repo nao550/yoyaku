@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+include 'class.php';
 
 if( isset( $_POST['mode'] )){
    add_yoyaku( $_POST );
@@ -27,6 +28,14 @@ if(! isset( $_GET['date'] )){
 	function submit_click(){
 	    var DATE = document.forms.yoyaku_admit.date_p.value;
 	    var CLASS = document.forms.yoyaku_admit.classtime.value;
+        var YOYAKUNUM = document.forms.yoyaku_admit.yoyakunum.value;
+        var YOYAKUMAX = document.forms.yoyaku_admit.yoyakumax.value;
+
+        if( YOYAKUNUM > YOYAKUMAX ){
+            window.alert('これ以上予約できません。');
+            return false;
+        }
+
 	    if(window.confirm( DATE + CLASS + "限目で予約します。\n送信してよろしいですか？")){ 
 		window.alert('予約しました。');
 		return true; // 「OK」時は送信を実行
@@ -42,7 +51,6 @@ if(! isset( $_GET['date'] )){
 
   <h1 id="pagetitle">受講予約</h1>
 
-  <!-- <?php echo "sql:" . $sql; ?> -->
 
   <form action="additem.php" method="POST" id="yoyaku_admit" onSubmit="return submit_click()">
     <label>日付：</label>
@@ -58,6 +66,8 @@ if(! isset( $_GET['date'] )){
     <input type="text" id="studentnm" name="studentnm" />
     <br />
     <input type="hidden" name="mode" value="add">
+    <input type="hidden" name="yoyakunum" value="<?php echo CheckYoyaku( $date, $class ); ?>">
+    <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
     <input type="submit" value="予約">
     <a href="index.php"><input type="button" value="戻る" /></a>
   </form>

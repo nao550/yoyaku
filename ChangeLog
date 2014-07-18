@@ -1,3 +1,8 @@
+2014-07-19  IKENO Naoki  <nao@kyo-to.net>
+
+	* additem.php: 
+	予約数の上限を越えていたら予約不可になるように修正
+
 2014-07-18  IKENO Naoki  <nao@kyo-to.net>
 
 	* class.php (calender): 
