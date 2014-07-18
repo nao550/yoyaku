@@ -3,6 +3,16 @@
 	* class.php (calender): 
 	CheckyYoyaku 追加、カレンダーに現在の予約人数表示ができるようになった。
 	ChgeckYoyaku関数はオブジェクト型のMySQL問合せで実装できた。
+	(calender): 
+	Add the variable of $RESVMAX 
+	$RESVMAX 越えたら予約不可(リンクが表示されなくなる)ように設定
+	→GET でclass渡してるので、予約登録時にもその時限の予約数を確認するようにするべき
+
+	next: 
+	管理者用予約一覧閲覧画面の作成
+	登録禁止日の反映
+	受講生キャンセル画面の作成
+	全体的にセキュリティへの対応
 
 2014-07-17  IKENO Naoki  <nao@kyo-to.net>
 

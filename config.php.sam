@@ -5,6 +5,7 @@ $DBNM = "crm";		// DB name.
 $DBUSER = "crm";	// DB user name.
 $DBPASS = "";		// DB user password.
 
-$SITETITLE = "Site of Reservation."  // Site title
+$SITETITLE = "Site name."  // Site title.
+$RESVMAX = 6;	       // Max of the class reservation.
 
 ?>

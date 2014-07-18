@@ -1,6 +1,7 @@
 <?php
 
 function calender( $ymd = ""){
+    global $RESVMAX;
 
     if ( $ymd == ""){
         $ymd = date("Y-m-01");
@@ -38,15 +39,17 @@ function calender( $ymd = ""){
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {
-                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . '</strong><br />';
-                echo '<div class="classtime">';
-                echo '  <a href="additem.php?date=' . $date . '&class=1">1限</a>：' . CheckYoyaku( $date, 1 )  . '<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=2">2限</a>：' . CheckYoyaku( $date, 2 )  . '<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=3">3限</a>：' . CheckYoyaku( $date, 3 )  . '<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=4">4限</a>：' . CheckYoyaku( $date, 4 )  . '<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=5">5限</a>：' . CheckYoyaku( $date, 5 )  . '<br />';
-                echo '  <a href="additem.php?date=' . $date . '&class=6">6限</a>：' . CheckYoyaku( $date, 6 ) ;
-                echo "\n";
+                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />\n";
+                echo '<div class="classtime">' . "\n";
+                // 6クラス分ループで生成する
+                for( $n = 1; $n < 7 ; $n++ ){
+                    $revNum = CheckYoyaku( $date, $n ); // 日時時限の予約数のとりだし
+                    if( $revNum < $RESVMAX ){
+                        echo '  <a href="additem.php?date=' . $date . '&class=' . $n . '">' . $n . '限</a>： ' . $revNum  . "<br />\n";
+                    } else {
+                        echo '  ' . $n . '限： ' . $revNum  . "<br />\n";
+                    }
+                }
             } else {
                 echo '<td>&#160;</td>';
                 echo "\n";
@@ -58,6 +61,8 @@ function calender( $ymd = ""){
 }
 
 function CheckYoyaku( $date, $class){
+    // 指定した日、時限の予約数を返す
+
    global $DBSV, $DBUSER , $DBPASS , $DBNM;
 
    $date = date("Y-m-d", $date);
