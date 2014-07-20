@@ -1,27 +1,50 @@
 <?php
+session_start();
+
 include '../config.php';
 include '../class.php';
-
-if( isset( $_GET['month'] )){
-    $month = $_GET['month'];
-} else {
-    $month = time();
-}
 
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>��������</title>
+  <title>管理画面</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
 </head>
 <body>
-<h1>��������ɽ��</h1>
+<h1>学生一覧表示</h1>
 
-    <?php scanyoyaku(); ?>
+    <?php 
+    if ( !isset( $_SESSION['user'] )){
+        $mode = 'nologin';  // 初回表示
+        DispLogin( $mode );
+    }
+
+if( $_SESSION['check'] == 'ok' ){
+    echo 'session ok <br >';
+    ScanyoYaku(); 
+} elseif( $_SESSION['check'] == 'ng' ){
+    $mode = 'ng';  // ログインフェイル
+    DispLogin( $mode );
+}
+
+session_write_close();;
+?>
 
 </body>
 </html>
+
+<?php
+
+function DispLogin( $mode ){
+    echo $mode;
+  }
+
+function ScanYoyaku(){
+    echo "ScanYoyakku\n";
+}
+
+?>
