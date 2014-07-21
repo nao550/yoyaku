@@ -7,13 +7,45 @@ include '../class.php';
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>´ÉÍı²èÌÌ</title>
+  <title>ç®¡ç†ç”»é¢</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
 </head>
 <body>
-<h1>³ØÀ¸°ìÍ÷É½¼¨</h1>
+<h1>å­¦ç”Ÿä¸€è¦§è¡¨ç¤º</h1>
+
+<?php
+    ScanYoyaku();
+?>
 
 </body>
 </html>
+
+<?php
+
+function ScanYoyaku(){
+    global $DBSV, $DBUSER , $DBPASS , $DBNM;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+
+   $sql = "select date, class, studentid, studentnm from yoyaku;";
+
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $result = $mysql->query( $sql );
+
+   echo '    <table class="listview"><tbody>';   echo "\n";
+   echo '      <tr><th>æ—¥ä»˜</th><th>æ™‚é™</th><th>å­¦ç±ç•ªå·</th><th>æ°å</th></tr>'; echo "\n";
+
+   while ( $row = $result->fetch_assoc()){
+      printf("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>",
+              $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+   }
+   echo "    </tbody></table>\n";
+
+}
+
+?>
