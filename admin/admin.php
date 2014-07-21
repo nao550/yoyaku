@@ -18,18 +18,19 @@ include '../class.php';
 <h1>学生一覧表示</h1>
 
     <?php 
+    echo session_name(),'=',session_id(),"<br />\n";
     if ( !isset( $_SESSION['user'] )){
         $mode = 'nologin';  // 初回表示
         DispLogin( $mode );
+    } else {
+        if( $_SESSION['check'] == 'ok' ){
+            echo 'session ok <br >';
+            ScanyoYaku(); 
+        } elseif( $_SESSION['check'] == 'ng' ){
+            $mode = 'ng';  // ログインフェイル
+            DispLogin( $mode );
+        }
     }
-
-if( $_SESSION['check'] == 'ok' ){
-    echo 'session ok <br >';
-    ScanyoYaku(); 
-} elseif( $_SESSION['check'] == 'ng' ){
-    $mode = 'ng';  // ログインフェイル
-    DispLogin( $mode );
-}
 
 session_write_close();;
 ?>
@@ -40,6 +41,8 @@ session_write_close();;
 <?php
 
 function DispLogin( $mode ){
+    $_SESSION['user'] = "admin";
+    $_SESSION['pass'] = "asss";
     echo $mode;
   }
 

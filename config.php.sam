@@ -5,6 +5,9 @@ $DBNM = "crm";		// DB name.
 $DBUSER = "crm";	// DB user name.
 $DBPASS = "";		// DB user password.
 
+$ADMINNM = "admim ID"; 	// Set Administrator ID.
+$ADMINPS = "admin pass"; // Set Administrator login password.
+
 $SITETITLE = "Site name."  // Site title.
 $RESVMAX = 6;	       // Max of the class reservation.
 
