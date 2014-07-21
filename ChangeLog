@@ -1,3 +1,12 @@
+2014-07-21  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/listview.php: 
+	予約のリスト表示ができるようになった。
+
+	next:
+	予約一覧画面で管理者のログインセッション管理ができるように修正する
+	学生の名前の右にキャンセル用のボタンを作成する
+
 2014-07-19  IKENO Naoki  <nao@kyo-to.net>
 
 	* additem.php: 

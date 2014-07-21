@@ -26,10 +26,11 @@ include '../class.php';
 
 function ScanYoyaku(){
     global $DBSV, $DBUSER , $DBPASS , $DBNM;
+    $n = 1;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
 
-   $sql = "select date, class, studentid, studentnm from yoyaku;";
+   $sql = "select date, class, studentid, studentnm from yoyaku order by date;";
 
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
@@ -37,12 +38,18 @@ function ScanYoyaku(){
    }
    $result = $mysql->query( $sql );
 
-   echo '    <table class="listview"><tbody>';   echo "\n";
+   echo '    <table id="listtable"><tbody>';   echo "\n";
    echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th></tr>'; echo "\n";
 
    while ( $row = $result->fetch_assoc()){
-      printf("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>",
-              $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+       if( $n%2 == 0 ){
+           printf("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n",
+                  $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+       } else {
+           printf("<tr class=\"bggray\"><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n",
+                  $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+       }
+       $n++;
    }
    echo "    </tbody></table>\n";
 
