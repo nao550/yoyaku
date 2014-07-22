@@ -32,10 +32,19 @@ function calender( $ymd = ""){
     //カレンダーを表示する
     echo '<table id="yoyakucal">';
     //見出し
-    echo "<tr><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>\n";
+    echo '<tr><th class="jigen">時限</th><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>' ;
+    echo "\n";
     //週のループ
     foreach ($data as $week) {
         echo "<tr>\n";
+        // 時限の挿入
+        echo '<td><br /><div class="classtime_t">';
+        echo '1限,10:50-11:40<br />';
+        echo '2限,11:50-12:40<br />';
+        echo '3限,13:30-14:20<br />';
+        echo '4限,14:30-15:20<br />';
+        echo '5限,15:30-16:20<br />';
+        echo '6限,16:30-17:20<br /></td>';
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {

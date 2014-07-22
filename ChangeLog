@@ -1,3 +1,12 @@
+2014-07-22  IKENO Naoki  <nao@kyo-to.net>
+
+	* css/style.css: 
+	時限の時間を表示するように修正
+
+	next:
+	時限のポップアップで時間を表示する
+	additem.php で選択している時限の時間を表示する
+
 2014-07-21  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/listview.php: 
