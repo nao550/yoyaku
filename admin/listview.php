@@ -22,6 +22,8 @@ include '../class.php';
 </body>
 </html>
 
+
+
 <?php
 
 function ScanYoyaku(){
@@ -39,16 +41,33 @@ function ScanYoyaku(){
    $result = $mysql->query( $sql );
 
    echo '    <table id="listtable"><tbody>';   echo "\n";
-   echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th></tr>'; echo "\n";
+   echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
 
    while ( $row = $result->fetch_assoc()){
        if( $n%2 == 0 ){
-           printf("<tr><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n",
-                  $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+           printf("<tr>");
        } else {
-           printf("<tr class=\"bggray\"><td>%s</td><td>%d</td><td>%s</td><td>%s</td></tr>\n",
-                  $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+           printf("<tr class=\"bggray\">");
        }
+
+// 以下のやりかたはまずい。
+// javascript でどのname.valueをとるのか判断できない
+
+
+       printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
+              $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+       printf('       <form action="listview.php" method="POST"  name="delchk" onSubmit="return delbt_click()" >' . "\n");
+
+       printf('         <input type="hidden" name="date" value="' . $row['date'] . '" />' . "\n");
+       printf('         <input type="hidden" name="class" value="' . $row['class'] . '" />' . "\n");
+       printf('         <input type="hidden" name="studentid" value="' . $row['studentid'] . '" />' . "\n");
+       printf('         <input type="hidden" name="studentnm" value="' . $row['studentnm'] . '" />' . "\n");
+       printf('         <input type="hidden" name="mdoe" value="delmode" />' . "\n");
+       printf('         <input type="submit" value="削除" /></td></tr>' . "\n");
+       printf('       </form>' . "\n");
+
+
+
        $n++;
    }
    echo "    </tbody></table>\n";
