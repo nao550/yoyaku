@@ -1,6 +1,7 @@
 <?php
 include '../config.php';
 include '../class.php';
+include 'admin_func.php';
 
 session_start();
 
@@ -26,12 +27,8 @@ if( isset( $_SESSION['user'])){
 </head>
 <body>
 
-<div id="menu">
-  <ul id="menu_list">
-    <li><a href="index.php?mode=destroy">ログオフ</a></li>
-    <li><a href="checkday.php">日付設定</a></li>
-  </ul>
-</div>
+<?php admin_menu_ul(); ?>
+
 
 <h1>学生一覧表示</h1>
 
