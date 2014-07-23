@@ -1,5 +1,12 @@
 2014-07-24  IKENO Naoki  <nao@kyo-to.net>
 
+	* class.php (chkdate): 
+	yoyaku_day テーブルから日付を見て、講座受付の設定変更完成
+
+	next:
+	ユーザキャンセル画面の作成
+	管理者キャンセル画面の作成
+
 	* admin/checkday.php (chk_day_mode): 
 	yoyaku_day テーブルを見て、1 があれば予約可能日、0 ならば予約不可日
 	が表示されるようになった。

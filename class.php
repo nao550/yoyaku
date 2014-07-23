@@ -49,18 +49,23 @@ function calender( $ymd = ""){
         foreach ($week as $date) {
             if ($date) {
                 echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />\n";
-                echo '<div class="classtime">' . "\n";
 
-                // 6クラス分ループで生成する
-                for( $n = 1; $n < 7 ; $n++ ){
-                    $revNum = CheckYoyaku( $date, $n ); // 日時時限の予約数のとりだし
-                    if( $revNum < $RESVMAX ){
-                        echo '  <a href="additem.php?date=' . $date . '&class=' . $n . '">' . $n . '限</a>： ' . $revNum  . "<br />\n";
-                    } else {
-                        echo '  ' . $n . '限： ' . $revNum  . "<br />\n";
+                if( chkdate( date('Y-m-d', $date) ) == '1' ){
+                    // 予約可能日
+                    echo '<div class="classtime">' . "\n";
+
+                    // 6クラス分ループで生成する
+                    for( $n = 1; $n < 7 ; $n++ ){
+                        $revNum = CheckYoyaku( $date, $n ); // 日時時限の予約数のとりだし
+                        if( $revNum < $RESVMAX ){
+                            echo '  <a href="additem.php?date=' . $date . '&class=' . $n . '">' . $n . '限</a>： ' . $revNum  . "<br />\n";
+                        } else {
+                            echo '  ' . $n . '限： ' . $revNum  . "<br />\n";
+                        }
                     }
-                }
+                } elseif ( chkdate( date('Y-m-d', $date )) == '0' ){
 
+                }
             } else {
                 echo '<td>&#160;</td>';
                 echo "\n";
@@ -92,6 +97,39 @@ function CheckYoyaku( $date, $class){
 
    return $num;
     
+}
+
+function chkdate( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "select flag from yoyaku_day where date ='$date'";
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $result = $mysql->query( $sql );
+
+   $s='';
+   $chkflag = $result->fetch_assoc();
+
+   if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
+       // 0 default Open, 1 default close.
+       // chkflag 0 close, 1 open.
+       $s = '0';
+   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
+       $s = '1';
+   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
+       $s = '1';
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
+       $s = '0';
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
+       $s = '1';
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
+       $s = '0';
+   }
+
+   return $s;
 }
 
 ?>
