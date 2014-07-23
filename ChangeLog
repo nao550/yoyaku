@@ -2,9 +2,10 @@
 
 	* admin/index.php: 
 	管理者ログインが出来るようになった。
+	listview.php へセッションを設定して、ログインしてなければ
+	index.phpへ転送するようになった。
 
-	next:
-	listview.php へセッションの設定
+	listview.php にログアウトリンクを設定した
 
 	* admin/listview.php: 
 	削除ボタンの作成で問題、

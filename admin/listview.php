@@ -2,6 +2,19 @@
 include '../config.php';
 include '../class.php';
 
+session_start();
+
+if( empty( $_SESSION['user'] )){
+    header("Location: index.php");
+}
+
+if( isset( $_SESSION['user'])){
+    echo "sesssion user set\n";
+    if( $_SESSION['user'] != $ADMINNM ){
+        header("Location: index.php");
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -13,6 +26,9 @@ include '../class.php';
   <link rel="stylesheet" href="../css/style.css">  
 </head>
 <body>
+<div id="menu">
+    <a href="index.php?mode=destroy">logout</a>
+</div>
 <h1>学生一覧表示</h1>
 
 <?php
