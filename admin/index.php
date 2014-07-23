@@ -2,23 +2,40 @@
 include '../config.php';
 include '../class.php';
 
+session_start();
+
+if( isset( $_POST['user'] ) and isset( $_POST['password'] )){
+    if( ($_POST['user'] == $ADMINNM) and ($_POST['password'] == $ADMINPS)){
+        $_SESSION['user'] = $_POST['user'];
+        header("Location: listview.php" );
+    }  
+} elseif( isset( $_SESSION['user'] ) and isset( $_POST['user'] )){
+    if( $_SESSION['user'] == $_POST['user'] ){ 
+        header("Location: listview.php" );
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>╢имЩ╡Хлл</title>
+  <title>Г╝║Г░├Г■╩И²╒</title>
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
 </head>
 <body>
-<h1>╢имЩ╪т╔М╔╟╔╓╔С</h1>
+  <h1>Г╝║Г░├Х─┘Ц┐╜Ц┌╟Ц┌╓Ц┐Ё</h1>
 
-<?php
-    ScanYoyaku();
-?>
 
+  <form action="index.php" method="POST" id="loginform">
+    <label>Ц┐╜Ц┌╟Ц┌╓Ц┐ЁЕ░█О╪ </label>
+    <input type="text" id="user" name="user" width='20' /><br />
+    <label>Ц┐▒Ц┌╧Ц┐╞Ц┐╪Ц┐┴О╪ </label>
+    <input type="text" id="password" name="password" width='20' /><br />
+    <input type="submit" value="Ц┐╜Ц┌╟Ц┌╓Ц┐Ё" />
+    <input type="reset" value="reset" />
+  </form>
 </body>
 </html>
-
