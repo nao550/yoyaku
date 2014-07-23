@@ -14,6 +14,10 @@ if( isset( $_GET['mode'] )){
         dateon( $_GET['date'] );
     } elseif( $_GET['mode'] == "dateoff" ){
         dateoff( $_GET['date'] );
+    } elseif( $_GET['mode'] == "addon" ){
+        addon( $_GET['date'] );
+    } elseif( $_GET['mode'] == "addoff" ){
+        addoff( $_GET['date'] );
     }
 }
 
@@ -32,6 +36,7 @@ if( isset( $_GET['mode'] )){
 
 <?php admin_menu_ul(); ?>
 
+<!-- <?php     echo $_GET['mode']; ?> -->
 <h1>予約可能日設定</h1>
 
     <div id="caltitle">
@@ -134,7 +139,6 @@ function chk_day_mode( $date ){
 
    $s='';
    $chkflag = $result->fetch_assoc();
-   echo $chkflag['flag'];
 
    if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
        // 0 default Open, 1 default close.
@@ -143,13 +147,13 @@ function chk_day_mode( $date ){
    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
        $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">○</a>";
    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
-       $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">○</a>";
+       $s = "<a href=\"checkday.php?mode=addoff&date=" . $date ."\">○</a>";
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
        $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">×</a>";
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
        $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">○</a>";
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
-       $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">×</a>";
+       $s = "<a href=\"checkday.php?mode=addon&date=" . $date ."\">×</a>";
    }
    return $s;
 
@@ -160,20 +164,44 @@ function dateon( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "insert into yoyaku_day ( flag ) value ( '1' ) where date='$date'";
+   $sql = "update yoyaku_day set flag='1' where date='$date'";
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
    }
    $mysql->query( $sql );
-   echo $sql;
 }
 
 function dateoff( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "insert into yoyaku_day ( flag ) value ( '0' ) where date='" . $date ;
+   $sql = "update yoyaku_day set flag='0' where date='$date'";
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $mysql->query( $sql );
+}
+
+function addon( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "insert into yoyaku_day ( flag, date ) value ( '1', '$date' )";
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $mysql->query( $sql );
+}
+
+function addoff( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "insert into yoyaku_day ( flag, date ) value ( '0', '$date' )";
+
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
