@@ -1,3 +1,13 @@
+2014-07-24  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/checkday.php (chk_day_mode): 
+	yoyaku_day テーブルを見て、1 があれば予約可能日、0 ならば予約不可日
+	が表示されるようになった。
+
+	next;
+	×、○をクリックすることでモード、可能、不可の変更ができるように
+	
+
 2014-07-23  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/index.php: 

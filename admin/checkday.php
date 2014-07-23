@@ -9,6 +9,14 @@ if( isset( $_GET['month'] )){
     $month = time();
 }
 
+if( isset( $_GET['mode'] )){
+    if( $_GET['mode'] == "dateon" ){
+        dateon( $_GET['date'] );
+    } elseif( $_GET['mode'] == "dateoff" ){
+        dateoff( $_GET['date'] );
+    }
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -101,7 +109,7 @@ function chk_calender( $ymd = ""){
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {
-                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />\n";
+                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />" . chk_day_mode(date('Y-m-d',$date)) . "</td>\n";
             } else {
                 echo '<td>&#160;</td>';
                 echo "\n";
@@ -111,4 +119,68 @@ function chk_calender( $ymd = ""){
     }
     echo '</table>';
 }
+
+
+function chk_day_mode( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "select flag from yoyaku_day where date ='$date'";
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $result = $mysql->query( $sql );
+
+   $s='';
+   $chkflag = $result->fetch_assoc();
+   echo $chkflag['flag'];
+
+   if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
+       // 0 default Open, 1 default close.
+       // chkflag 0 close, 1 open.
+       $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">×</a>";
+   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
+       $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">○</a>";
+   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
+       $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">○</a>";
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
+       $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">×</a>";
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
+       $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">○</a>";
+   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
+       $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">×</a>";
+   }
+   return $s;
+
+}
+
+
+function dateon( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "insert into yoyaku_day ( flag ) value ( '1' ) where date='$date'";
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $mysql->query( $sql );
+   echo $sql;
+}
+
+function dateoff( $date ){
+    global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
+
+   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+   $sql = "insert into yoyaku_day ( flag ) value ( '0' ) where date='" . $date ;
+   if( $mysql->connect_errno ){
+       printf( "Connect failed: %s\n", $mysql->connect_error );
+       exit();
+   }
+   $mysql->query( $sql );
+}
+
+
+
 ?>

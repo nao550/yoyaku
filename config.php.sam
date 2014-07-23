@@ -10,5 +10,6 @@ $ADMINPS = "admin pass"; // Set Administrator login password.
 
 $SITETITLE = "Site name."  // Site title.
 $RESVMAX = 6;	       // Max of the class reservation.
+$CHK_DATE_MODE = "0"    // 0 default Open, 1 default close.
 
 ?>
