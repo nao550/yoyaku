@@ -50,6 +50,7 @@ function calender( $ymd = ""){
             if ($date) {
                 echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />\n";
                 echo '<div class="classtime">' . "\n";
+
                 // 6クラス分ループで生成する
                 for( $n = 1; $n < 7 ; $n++ ){
                     $revNum = CheckYoyaku( $date, $n ); // 日時時限の予約数のとりだし
@@ -59,6 +60,7 @@ function calender( $ymd = ""){
                         echo '  ' . $n . '限： ' . $revNum  . "<br />\n";
                     }
                 }
+
             } else {
                 echo '<td>&#160;</td>';
                 echo "\n";
