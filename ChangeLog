@@ -1,5 +1,11 @@
 2014-07-23  IKENO Naoki  <nao@kyo-to.net>
 
+	* admin/index.php: 
+	管理者ログインが出来るようになった。
+
+	next:
+	listview.php へセッションの設定
+
 	* admin/listview.php: 
 	削除ボタンの作成で問題、
 	name にしてならべると、javascriptの確認でどのname.valueをとるのか判別できない。
