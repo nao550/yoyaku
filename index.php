@@ -20,6 +20,12 @@ if( isset( $_GET['month'] )){
 </head>
 <body>
 
+  <div id="user_menu">
+    <ul id="user_menu_ul">
+      <li><a href="user_cancel.php">予約キャンセル</a></li>
+      <li><a href="./admin/index.php">管理者画面</a></li>
+  </div>
+
     <h1>
 <?php
     echo $SITETITLE; 
@@ -55,9 +61,7 @@ if( isset( $_GET['month'] )){
       </div>
     </div>
 
-<?php
-calender($month);
-?>
+<?php calender($month); ?>
 
 </body>
 </html>

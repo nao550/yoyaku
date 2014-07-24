@@ -3,8 +3,8 @@
 function admin_menu_ul(){
 
 print <<< EOF
-<div id="menu">
-  <ul id="menu_list">
+<div id="admin_menu">
+  <ul id="admin_menu_ul">
     <li><a href="index.php?mode=destroy">ログオフ</a></li>
     <li><a href="checkday.php">日付設定</a></li>
   </ul>

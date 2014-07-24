@@ -18,6 +18,27 @@ strong {
     font-weight: bold;
  }
 
+#user_menu { 
+    text-align: left;
+ }
+
+#user_menu_ul li{ 
+    display: inline;
+ }
+
+#user_menu_ul li a{ 
+    width: 1000px;
+ }
+
+
+#admin_menu { 
+    text-align: left;
+ }
+
+#admin_menu_ul li { 
+    display: inline;
+ }
+
 #caltitle { 
     margin: 0 auto;
     padding-top: 20px;
