@@ -100,6 +100,25 @@ function CheckYoyaku( $date, $class){
 }
 
 function chkdate( $date ){
+
+    switch( chk_day_mode( $date )){
+    case '1': 
+        return( 0 );
+        break;
+    case '2': 
+        return( 1 );
+        break;
+    case '3': 
+        return( 1 );
+        break;
+    case '4': 
+        return( 0 );
+        break;
+    }
+}
+
+
+function chk_day_mode( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
@@ -116,22 +135,19 @@ function chkdate( $date ){
    if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
        // 0 default Open, 1 default close.
        // chkflag 0 close, 1 open.
-       $s = '0';
+       $s = '1' ;  //day false dateon;
    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
-       $s = '1';
+       $s = '2'; //day true dateoff
    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
-       $s = '1';
+       $s = '3'; //day false addoff
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
-       $s = '0';
+       $s = '1'; //day false dateon
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
-       $s = '1';
+       $s = '2'; //day true dateoff
    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
-       $s = '0';
+       $s = '4'; //day true addon
    }
-
    return $s;
 }
-
-
 
 ?>

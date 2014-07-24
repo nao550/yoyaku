@@ -2,6 +2,8 @@
 
 	* class.php (chkdate): 
 	yoyaku_day テーブルから日付を見て、講座受付の設定変更完成
+	(chkdate, chk_day_mode): 
+	chk_day_mode を共通関数化
 
 	next:
 	ユーザキャンセル画面の作成
