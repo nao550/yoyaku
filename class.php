@@ -80,26 +80,23 @@ function CheckYoyaku( $date, $class){
     // 指定した日、時限の予約数を返す
 
    global $DBSV, $DBUSER , $DBPASS , $DBNM;
-
    $date = date("Y-m-d", $date);
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-
    $sql = "select studentid from yoyaku where date ='$date' and class ='$class'";
-
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
    }
-
    $result = $mysql->query( $sql );
-
    $num = $result->num_rows;
-
    return $num;
-    
 }
 
 function chkdate( $date ){
+    // 予約可能日かどうかのチェック
+    // return
+    // 0: 予約不可能
+    // 1: 予約可能
 
     switch( chk_day_mode( $date )){
     case '1': 
@@ -119,6 +116,13 @@ function chkdate( $date ){
 
 
 function chk_day_mode( $date ){
+    // $date が予約可能日かどうか、DBに登録されているかどうか
+    // return
+    // 1: 予約可能 yoyaku_day に日付あり
+    // 2: 予約不可能 yoyaku_day に日付あり
+    // 3: 予約可能 yoyaku_day に日付なし
+    // 4: 予約不可能 yoyaku_day に日付なし
+
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
