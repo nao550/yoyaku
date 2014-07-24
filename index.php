@@ -20,11 +20,7 @@ if( isset( $_GET['month'] )){
 </head>
 <body>
 
-  <div id="user_menu">
-    <ul id="user_menu_ul">
-      <li><a href="user_cancel.php">予約キャンセル</a></li>
-      <li><a href="./admin/index.php">管理者画面</a></li>
-  </div>
+  <?php user_menu() ?>
 
     <h1>
 <?php
