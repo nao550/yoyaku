@@ -73,7 +73,7 @@ if(! isset( $_GET['date'] )){
     <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
     <input type="submit" value="受講予約">
     <a href="index.php"><input type="button" value="戻る" /></a>
-    <input type="button" value="予約キャンセル" onClick="CancelClick/></a>
+    <input type="button" value="予約キャンセル" onClick="CancelClick" /></a>
   </form>
 
 </body>
