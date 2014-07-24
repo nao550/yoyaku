@@ -1,5 +1,9 @@
 <?php
 
+function hsc( $s ){
+    return htmlspecialchars( $s );
+}
+
 function calender( $ymd = ""){
     global $RESVMAX;
 
