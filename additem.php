@@ -49,8 +49,9 @@ if(! isset( $_GET['date'] )){
 </head>
 <body>
 
-  <h1 id="pagetitle">受講予約</h1>
+    <?php user_menu(); ?>
 
+  <h1 id="pagetitle">受講予約</h1>
 
   <form action="additem.php" method="POST" id="yoyaku_admit" onSubmit="return submit_click()">
     <label>日付：</label>
