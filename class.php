@@ -155,16 +155,4 @@ function chk_day_mode( $date ){
 }
 
 
-function user_menu(){
-
-    print <<< EOF
-  <div id="user_menu">
-    <ul id="user_menu_ul">
-      <li><a href="index.php">予約画面へ</a></li>        
-      <li><a href="./admin/index.php">管理者画面</a></li>
-    </ul>
-  </div>
-EOF;
-}
-
 ?>

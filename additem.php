@@ -51,7 +51,11 @@ if(! isset( $_GET['date'] )){
 </head>
 <body>
 
-    <?php user_menu(); ?>
+  <div id="user_menu">
+    <ul id="user_menu_ul">
+      <li><a href="index.php">トップへ</a></li>
+    </ul>
+  </div>
 
   <h1 id="pagetitle">受講予約</h1>
 
