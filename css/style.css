@@ -24,10 +24,11 @@ strong {
 
 #user_menu_ul li{ 
     display: inline;
+    margin-left: 30px;
  }
 
 #user_menu_ul li a{ 
-    width: 1000px;
+
  }
 
 
@@ -37,6 +38,7 @@ strong {
 
 #admin_menu_ul li { 
     display: inline;
+    margin-left: 30px;
  }
 
 #caltitle { 
