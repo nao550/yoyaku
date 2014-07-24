@@ -161,7 +161,6 @@ function user_menu(){
   <div id="user_menu">
     <ul id="user_menu_ul">
       <li><a href="index.php">予約画面へ</a></li>        
-      <li><a href="user_cancel.php">予約キャンセル</a></li>
       <li><a href="./admin/index.php">管理者画面</a></li>
     </ul>
   </div>
