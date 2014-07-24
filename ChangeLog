@@ -1,5 +1,11 @@
 2014-07-24  IKENO Naoki  <nao@kyo-to.net>
 
+	* additem.php: 
+	受講予約にキャンセルボタンを設置
+	javascript で日付時限名IDを取得して、GETリンク作成して、
+	キャンセル画面にとばしてデータチェック、キャンセル確認、実行
+	しようと思う。
+
 	* class.php (chkdate): 
 	yoyaku_day テーブルから日付を見て、講座受付の設定変更完成
 	(chkdate, chk_day_mode): 

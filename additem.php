@@ -43,6 +43,8 @@ if(! isset( $_GET['date'] )){
 		return false; // 送信を中止
 	    }
 	}
+
+
       -->
   </script>
 
@@ -69,8 +71,9 @@ if(! isset( $_GET['date'] )){
     <input type="hidden" name="mode" value="add">
     <input type="hidden" name="yoyakunum" value="<?php echo CheckYoyaku( $date, $class ); ?>">
     <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
-    <input type="submit" value="予約">
+    <input type="submit" value="受講予約">
     <a href="index.php"><input type="button" value="戻る" /></a>
+    <input type="button" value="予約キャンセル" onClick="CancelClick/></a>
   </form>
 
 </body>
