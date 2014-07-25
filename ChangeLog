@@ -1,3 +1,16 @@
+2014-07-26  IKENO Naoki  <nao@kyo-to.net>
+
+	* cancelitem.php: 
+	ユーザキャンセルの完成
+
+	* class.php (YOYAKU): 
+	YOYAKU クラスの実装
+	ischk: 予約の有無を返す
+	num: 予約数を返す
+	add: 追加する
+	del: 削除する
+	
+
 2014-07-25  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/checkday.php (chk_calender): 
