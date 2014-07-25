@@ -62,7 +62,7 @@ function calender( $ymd = ""){
                     // 6クラス分ループで生成する
                     for( $n = 1; $n < 7 ; $n++ ){
                         $revNum = CheckYoyaku( $date, $n ); // 日時時限の予約数のとりだし
-                        if( $revNum < $RESVMAX ){
+                        if( $revNum < ($RESVMAX + 1)){
                             echo '  <a href="additem.php?date=' . $date . '&class=' . $n . '">' . $n . '限</a>： ' . $revNum  . "<br />\n";
                         } else {
                             echo '  ' . $n . '限： ' . $revNum  . "<br />\n";
