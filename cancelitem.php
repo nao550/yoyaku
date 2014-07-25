@@ -5,8 +5,8 @@ include 'class.php';
 if( isset( $_GET )){
     $date = h( $_GET['date'] );
     $class = h( $_GET['class'] );
-    $studentid = h( $_GET['studentid'] );
-    $studentnm = h( $_GET['studentnm'] );
+    $id = h( $_GET['studentid'] );
+    $nm = h( $_GET['studentnm'] );
 } else {
     heder('Location: index.php');
 }
@@ -24,8 +24,22 @@ if( isset( $_GET )){
 <body>
 
 <?php
-    echo $date . $class . $studentid . $studentnm ;
+
+$yoyaku = new YOYAKU();
+if( $yoyaku->ischk( $date, $class, $id, $nm ) === 0 ){
+    echo $date . "<br />" . $class ."時限<br />学籍番号：" . $id . "<br />名前：" . $nm . "<br />の予約はありません。<br />";
+    echo "<a href=\"index.php\">トップへ</a>";
+} else {
+    $yoyaku->del( $date, $class, $id, $nm );
+    echo $date . "<br />" . $class ."時限<br />学籍番号：" . $id . "<br />名前：" . $nm . "<br />の予約を削除しました。<br />";
+    echo "<a href=\"index.php\">トップへ</a>";
+}
+                                        
+
+
 ?>
+
+
 
 </body>
 </html>
