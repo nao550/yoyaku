@@ -1,12 +1,9 @@
 <?php
 
 function h( $s ){
-    return htmlspecialchars( $s );
+    return htmlspecialchars( $s, ENT_QUOTES, 'UTF-8');
 }
 
-function m( $s ){
-    return mysql_real_escape_string( $s );
-}
 
 function calender( $ymd = ""){
     global $RESVMAX;
