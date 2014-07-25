@@ -16,20 +16,20 @@ if( isset( $_SESSION['user'])){
 }
 
 if( isset( $_GET['month'] )){
-    $month = $_GET['month'];
+    $month = h( $_GET['month'] );
 } else {
     $month = time();
 }
 
 if( isset( $_GET['mode'] )){
     if( $_GET['mode'] == "dateon" ){
-        dateon( $_GET['date'] );
+        dateon( h( $_GET['date'] ));
     } elseif( $_GET['mode'] == "dateoff" ){
-        dateoff( $_GET['date'] );
+        dateoff( h( $_GET['date'] ));
     } elseif( $_GET['mode'] == "addon" ){
-        addon( $_GET['date'] );
+        addon( h( $_GET['date'] ));
     } elseif( $_GET['mode'] == "addoff" ){
-        addoff( $_GET['date'] );
+        addoff( h($_GET['date'] ));
     }
 }
 
@@ -48,7 +48,6 @@ if( isset( $_GET['mode'] )){
 
 <?php admin_menu_ul(); ?>
 
-<!-- <?php     echo $_GET['mode']; ?> -->
 <h1>予約可能日設定</h1>
 
     <div id="caltitle">
@@ -87,12 +86,12 @@ if( isset( $_GET['mode'] )){
 
 
 <?php
-function chk_calender( $ymd = ""){
+function chk_calender( $month = ""){
 
-    if ( $ymd == ""){
+    if ( $month == ""){
         $ymd = date("Y-m-01");
     } else {
-        $ymd = date("Y-m", $ymd) . "-01";
+        $ymd = date("Y-m", $month) . "-01";
     }
 
     //開始日のタイムスタンプ
@@ -126,7 +125,7 @@ function chk_calender( $ymd = ""){
         //週の中の日のループ
         foreach ($week as $date) {
             if ($date) {
-                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />" . chk_day(date('Y-m-d',$date)) . "</td>\n";
+                echo '<td><!--' . date('Y-m-d',$date) . '--><strong>' . date('j', $date) . "</strong><br />" . chk_day( date('Y-m-d',$date), $month ) . "</td>\n";
             } else {
                 echo '<td>&#160;</td>';
                 echo "\n";
@@ -137,20 +136,20 @@ function chk_calender( $ymd = ""){
     echo '</table>';
 }
 
-function chk_day( $date ){
+function chk_day( $date, $month ){
 
     switch( chk_day_mode( $date )){
     case '1':
-        $s = "<a href=\"checkday.php?mode=dateon&date=" . $date ."\">×</a>";
+        $s = "<a href=\"checkday.php?mode=dateon&date=" . $date . "&month=" . $month . "\">×</a>";
         break;
     case '2':
-        $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date ."\">○</a>";
+        $s = "<a href=\"checkday.php?mode=dateoff&date=" . $date . "&month=" . $month . "\">○</a>";
         break;
     case '3':
-        $s = "<a href=\"checkday.php?mode=addoff&date=" . $date ."\">○</a>";
+        $s = "<a href=\"checkday.php?mode=addoff&date=" . $date . "&month=" . $month . "\">○</a>";
         break;
     case '4':
-        $s = "<a href=\"checkday.php?mode=addon&date=" . $date ."\">×</a>";
+        $s = "<a href=\"checkday.php?mode=addon&date=" . $date . "&month=" . $month .  "\">×</a>";
         break;
     }
     return $s;
@@ -160,7 +159,7 @@ function dateon( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "update yoyaku_day set flag='1' where date='$date'";
+   $sql = sprintf("update yoyaku_day set flag='1' where date='%s'", $mysql->real_escape_string( $date ));
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
@@ -172,7 +171,7 @@ function dateoff( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "update yoyaku_day set flag='0' where date='$date'";
+   $sql = sprintf("update yoyaku_day set flag='0' where date='%s'", $mysql->real_escape_string( $date ));
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
@@ -184,7 +183,7 @@ function addon( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "insert into yoyaku_day ( flag, date ) value ( '1', '$date' )";
+   $sql = sprintf("insert into yoyaku_day ( flag, date ) value ( '1', '%s' )", $mysql->real_escape_string( $date ));
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
@@ -196,7 +195,7 @@ function addoff( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "insert into yoyaku_day ( flag, date ) value ( '0', '$date' )";
+   $sql = sprintf("insert into yoyaku_day ( flag, date ) value ( '0', '%s' )", $mysql->real_escape_string( $date ));
 
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
