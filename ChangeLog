@@ -1,3 +1,13 @@
+2014-07-25  IKENO Naoki  <nao@kyo-to.net>
+
+	* class.php (chk_day_mode): 
+	SQLのエスケープ対応
+
+	* checkday.php
+	erata:
+	checkday.php にてで先の月の日付をクリックすると現在の月に戻る
+	
+
 2014-07-24  IKENO Naoki  <nao@kyo-to.net>
 
 	* additem.php: 

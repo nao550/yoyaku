@@ -90,7 +90,7 @@ function CheckYoyaku( $date, $class){
    global $DBSV, $DBUSER , $DBPASS , $DBNM;
    $date = date("Y-m-d", $date);
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "select studentid from yoyaku where date ='$date' and class ='$class'";
+   $sql = sprintf("select studentid from yoyaku where date ='%s' and class ='%s'", $mysql->real_escape_string( $date ), $mysql->real_escape_string( $class ));
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
@@ -139,7 +139,7 @@ function chk_day_mode( $date ){
        exit();
    }
 
-   $sql = "select flag from yoyaku_day where date ='$date'";
+   $sql = sprintf("select flag from yoyaku_day where date ='%s'", $mysql->real_escape_string( $date ));
    $result = $mysql->query( $sql );
 
    $s='';
