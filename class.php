@@ -133,48 +133,92 @@ function chk_day_mode( $date ){
 
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
-   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   if( $mysql->connect_errno ){
-       printf( "Connect failed: %s\n", $mysql->connect_error );
-       exit();
-   }
+    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+    if( $mysql->connect_errno ){
+        printf( "Connect failed: %s\n", $mysql->connect_error );
+        exit();
+    }
 
-   $sql = sprintf("select flag from yoyaku_day where date ='%s'", $mysql->real_escape_string( $date ));
-   $result = $mysql->query( $sql );
+    $sql = sprintf("select flag from yoyaku_day where date ='%s'", $mysql->real_escape_string( $date ));
+    $result = $mysql->query( $sql );
 
-   $s='';
-   $chkflag = $result->fetch_assoc();
+    $s='';
+    $chkflag = $result->fetch_assoc();
 
-   if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
-       // 0 default Open, 1 default close.
-       // chkflag 0 close, 1 open.
-       $s = '1' ;  //day false dateon;
-   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
-       $s = '2'; //day true dateoff
-   } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
-       $s = '3'; //day false addoff
-   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
-       $s = '1'; //day false dateon
-   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
-       $s = '2'; //day true dateoff
-   } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
-       $s = '4'; //day true addon
-   }
-   return $s;
+    if(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '0' )){
+        // 0 default Open, 1 default close.
+        // chkflag 0 close, 1 open.
+        $s = '1' ;  //day false dateon;
+    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '1' )){
+        $s = '2'; //day true dateoff
+    } elseif(( $CHK_DATE_MODE == "0" ) and ( $chkflag['flag'] == '' )){
+        $s = '3'; //day false addoff
+    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '0' )){
+        $s = '1'; //day false dateon
+    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '1' )){
+        $s = '2'; //day true dateoff
+    } elseif(( $CHK_DATE_MODE == "1" ) and ( $chkflag['flag'] == '' )){
+        $s = '4'; //day true addon
+    }
+    return $s;
 }
 
 
 class YOYAKU {
 
     function ischk( $date, $class, $id, $nm ){
+        // 予約が有無のチェック、あれば 1 を返す、なければ 0
+        global $DBSV, $DBUSER, $DBPASS, $DBNM;
+        $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+        if( $mysql->connect_errno ){
+            printf( "Connect failed: %s\n", $mysql->connect_error );
+            exit();
+        }
 
+        $sql = sprintf("select * from yoyaku where date ='%s' and class='%s' and studentid='%s' and studentnm='%s';", 
+                       $mysql->real_escape_string( $date ), 
+                       $mysql->real_escape_string( $class ), 
+                       $mysql->real_escape_string( $id ), 
+                       $mysql->real_escape_string( $nm ));
+        $result = $mysql->query( $sql );
+
+        return $result->num_rows;
     }
 
     function add( $date, $class, $id, $nm ){
+        // 予約を登録する
+        global $DBSV, $DBUSER, $DBPASS, $DBNM;
+        $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+        if( $mysql->connect_errno ){
+            printf( "Connect failed: %s\n", $mysql->connect_error );
+            exit();
+        }
 
+        $sql = sprintf("insert into yoyaku ( date, class, studentid, studentnm, regdate ) value ( '%s', '%s', '%s', '%s', '%s' )", 
+                       $mysql->real_escape_string( $date ), 
+                       $mysql->real_escape_string( $class ), 
+                       $mysql->real_escape_string( $id ), 
+                       $mysql->real_escape_string( $nm ),
+                       date('Y-m-d'));
+        echo $sql;
+        $mysql->query( $sql );
     }
 
     function del( $date, $class, $id, $nm ){
+        // 予約を削除する、削除できれば 1 を返す
+        global $DBSV, $DBUSER, $DBPASS, $DBNM;
+        $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+        if( $mysql->connect_errno ){
+            printf( "Connect failed: %s\n", $mysql->connect_error );
+            exit();
+        }
+
+        $sql = sprintf("delete from yoyaku where date ='%s' and class='%s' and studentid='%s' and studentnm='%s';", 
+                       $mysql->real_escape_string( $date ), 
+                       $mysql->real_escape_string( $class ), 
+                       $mysql->real_escape_string( $id ), 
+                       $mysql->real_escape_string( $nm ));
+         $mysql->query( $sql );
 
     }
 
