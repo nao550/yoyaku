@@ -4,6 +4,10 @@ function h( $s ){
     return htmlspecialchars( $s );
 }
 
+function m( $s ){
+    return mysql_real_escape_string( $s );
+}
+
 function calender( $ymd = ""){
     global $RESVMAX;
 
@@ -130,11 +134,12 @@ function chk_day_mode( $date ){
     global $DBSV, $DBUSER, $DBPASS, $DBNM, $CHK_DATE_MODE;
 
    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-   $sql = "select flag from yoyaku_day where date ='$date'";
    if( $mysql->connect_errno ){
        printf( "Connect failed: %s\n", $mysql->connect_error );
        exit();
    }
+
+   $sql = "select flag from yoyaku_day where date ='$date'";
    $result = $mysql->query( $sql );
 
    $s='';
