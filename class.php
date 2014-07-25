@@ -1,6 +1,6 @@
 <?php
 
-function hsc( $s ){
+function h( $s ){
     return htmlspecialchars( $s );
 }
 
@@ -156,6 +156,23 @@ function chk_day_mode( $date ){
        $s = '4'; //day true addon
    }
    return $s;
+}
+
+
+class YOYAKU {
+
+    function ischk( $date, $class, $id, $nm ){
+
+    }
+
+    function add( $date, $class, $id, $nm ){
+
+    }
+
+    function del( $date, $class, $id, $nm ){
+
+    }
+
 }
 
 

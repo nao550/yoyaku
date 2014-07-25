@@ -3,14 +3,14 @@ include 'config.php';
 include 'class.php';
 
 if( isset( $_POST['mode'] )){
-   add_yoyaku( $_POST );
+   add_yoyaku( h( $_POST ));
 }
 
 if(! isset( $_GET['date'] )){
     header( 'Location: index.php' );
 } else {
-    $date = $_GET['date'];
-    $class = $_GET['class'];
+    $date = h( $_GET['date'] );
+    $class = h( $_GET['class'] );
 }
 ?>
 
@@ -28,13 +28,13 @@ if(! isset( $_GET['date'] )){
 	function submit_click(){
 	    var DATE = document.forms.yoyaku_admit.date_p.value;
 	    var CLASS = document.forms.yoyaku_admit.classtime.value;
-        var YOYAKUNUM = document.forms.yoyaku_admit.yoyakunum.value;
-        var YOYAKUMAX = document.forms.yoyaku_admit.yoyakumax.value;
+            var YOYAKUNUM = document.forms.yoyaku_admit.yoyakunum.value;
+            var YOYAKUMAX = document.forms.yoyaku_admit.yoyakumax.value;
 
-        if( YOYAKUNUM > YOYAKUMAX ){
-            window.alert('これ以上予約できません。');
-            return false;
-        }
+            if( YOYAKUNUM > YOYAKUMAX ){
+		window.alert('これ以上予約できません。');
+		return false;
+            }
 
 	    if(window.confirm( DATE + CLASS + "限目で予約します。\n送信してよろしいですか？")){ 
 		window.alert('予約しました。');
@@ -44,7 +44,20 @@ if(! isset( $_GET['date'] )){
 	    }
 	}
 
+	function CancelClick(){
+	    var DATE = document.forms.yoyaku_admit.date.value;
+	    var CLASS = document.forms.yoyaku_admit.classtime.value;
+	    var STUDENTNM = document.forms.yoyaku_admit.studentnm.value;
+	    var STUDENTID = document.forms.yoyaku_admit.studentid.value;
 
+	    if( window.confirm( DATE + CLASS + "\n" + "学籍番号：" + STUDENTID + " 氏名：" + STUDENTNM + "\nの申込をキャンセルしますか？")){
+		// キャンセル実行
+		location.href="./cancelitem.php?date=" + DATE + "&class=" + CLASS + "&studentid=" + STUDENTID + "&studentnm=" + STUDENTNM;
+	    }
+	    else {
+		return false; //　キャンセル中止
+	    }
+	}
       -->
   </script>
 
@@ -77,7 +90,7 @@ if(! isset( $_GET['date'] )){
     <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
     <input type="submit" value="受講予約">
     <a href="index.php"><input type="button" value="戻る" /></a>
-    <input type="button" value="予約キャンセル" onClick="CancelClick" /></a>
+    <input type="button" value="予約キャンセル" onclick="CancelClick()" />
   </form>
 
 </body>
@@ -89,10 +102,10 @@ function add_yoyaku( $POST ){
 
    global $DBSV, $DBUSER , $DBPASS , $DBNM;
 
-   $date = $POST['date'];
-   $class = $POST['class'];
-   $studentid = $POST['studentid'];
-   $studentnm = $POST['studentnm'];
+   $date = h( $POST['date'] );
+   $class = h( $POST['class'] );
+   $studentid = h( $POST['studentid'] );
+   $studentnm = h( $POST['studentnm'] );
    $regdate = date("Y-m-d H:i:s");
 
    $sql = "insert into yoyaku ( date, class, studentid, studentnm, regdate ) value ( '$date', '$class', '$studentid', '$studentnm', '$regdate' )";
@@ -102,5 +115,6 @@ function add_yoyaku( $POST ){
    mysqli_query( $link, $sql) or die(mysqli_error( $link ));
 
 }
+
 
 ?>

@@ -20,16 +20,20 @@ if( isset( $_GET['month'] )){
 </head>
 <body>
 
-  <?php user_menu() ?>
+  <div id="user_menu">
+    <ul id="user_menu_ul">
+      <li><a href="./admin/index.php">管理者画面</a></li>
+    </ul>
+  </div>
 
-    <h1>
+  <h1>
 <?php
     echo $SITETITLE; 
 ?>
-    </h1>
+  </h1>
 
-    <div id="caltitle">
-      <div id="caltitle_l">
+  <div id="caltitle">
+    <div id="caltitle_l">
 <?php
        $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
        $last = date("Y年m月", $lastmonth);
