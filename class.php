@@ -182,11 +182,28 @@ class YOYAKU {
                        $mysql->real_escape_string( $nm ));
         $result = $mysql->query( $sql );
 
-        return $result->num_rows;
+        return( $result->num_rows );
     }
 
+
+    function num( $date, $class){
+        // 指定した日、時限の予約数を返す
+        global $DBSV, $DBUSER , $DBPASS , $DBNM;
+        $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+        $sql = sprintf("select studentid from yoyaku where date ='%s' and class ='%s'", $mysql->real_escape_string( $date ), $mysql->real_escape_string( $class ));
+        if( $mysql->connect_errno ){
+            printf( "Connect failed: %s\n", $mysql->connect_error );
+            exit();
+        }
+        $result = $mysql->query( $sql );
+        echo $sql;
+        $num = $result->num_rows;
+        return( $num );
+    }
+
+
     function add( $date, $class, $id, $nm ){
-        // 予約を登録する
+        // 予約を登録する, 正常終了で1が返る
         global $DBSV, $DBUSER, $DBPASS, $DBNM;
         $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
         if( $mysql->connect_errno ){
@@ -200,9 +217,9 @@ class YOYAKU {
                        $mysql->real_escape_string( $id ), 
                        $mysql->real_escape_string( $nm ),
                        date('Y-m-d'));
-        echo $sql;
-        $mysql->query( $sql );
+        return ($mysql->query( $sql ));
     }
+
 
     function del( $date, $class, $id, $nm ){
         // 予約を削除する、削除できれば 1 を返す
@@ -218,7 +235,7 @@ class YOYAKU {
                        $mysql->real_escape_string( $class ), 
                        $mysql->real_escape_string( $id ), 
                        $mysql->real_escape_string( $nm ));
-         $mysql->query( $sql );
+        return( $mysql->query( $sql ));
 
     }
 
