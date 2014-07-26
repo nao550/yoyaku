@@ -6,8 +6,11 @@
 	管理者キャンセル
 	listview.php のページング
 	bootstrap の適用
+	日曜日、土曜日の色着け
 	個別関数を排除して YOYAKU class に変更
 	PHPUnit の導入
+	ドキュメントの作成
+	
 
 	* cancelitem.php: 
 	ユーザキャンセルの完成
