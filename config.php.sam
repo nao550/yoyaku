@@ -10,6 +10,7 @@ $ADMINPS = "admin pass"; // Set Administrator login password.
 
 $SITETITLE = "Site name."  // Site title.
 $RESVMAX = 6;	       // Max of the class reservation.
-$CHK_DATE_MODE = "0"    // 0 default Open, 1 default close.
+$CHK_DATE_MODE = "0";    // 0 default Open, 1 default close.
 
+$MAXROWS = 30;      	// Number of the reservation list page rows.
 ?>

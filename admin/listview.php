@@ -5,16 +5,18 @@ include 'admin_func.php';
 
 session_start();
 
-if( empty( $_SESSION['user'] )){
+if( empty( $_SESSION['user'] ) or ( $_SESSION['user'] != $ADMINNM )){
     header("Location: index.php");
 }
 
-if( isset( $_SESSION['user'])){
-    if( $_SESSION['user'] != $ADMINNM ){
-        header("Location: index.php");
-    }
+if( isset( $_GET['page'] )){
+    $page = h( $_GET['page'] );
+} else {
+    $page = 1;
 }
 
+$page = PageLimit( $page );
+        
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,13 +29,20 @@ if( isset( $_SESSION['user'])){
 </head>
 <body>
 
-<?php admin_menu_ul(); ?>
+<?php 
+    admin_menu_ul(); 
+?>
 
 
 <h1>学生一覧表示</h1>
 
+
 <?php
-    ScanYoyaku();
+$pagemove = Paging( $page );
+
+echo $pagemove;
+ScanYoyaku( $page );
+echo $pagemove;
 ?>
 
 </body>
@@ -43,29 +52,29 @@ if( isset( $_SESSION['user'])){
 
 <?php
 
-function ScanYoyaku(){
-    global $DBSV, $DBUSER , $DBPASS , $DBNM;
+function ScanYoyaku( $page ){
+    global $DBSV, $DBUSER , $DBPASS , $DBNM, $MAXROWS;
     $n = 1;
+    $startrow = ( $page - 1)  * $MAXROWS;
 
-   $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+    $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+    $sql = "select date, class, studentid, studentnm from yoyaku order by date limit  $startrow, $MAXROWS;";
+    
+    if( $mysql->connect_errno ){
+        printf( "Connect failed: %s\n", $mysql->connect_error );
+        exit();
+    }
+    $result = $mysql->query( $sql );
 
-   $sql = "select date, class, studentid, studentnm from yoyaku order by date;";
+    echo '    <table id="listtable"><tbody>';   echo "\n";
+    echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
 
-   if( $mysql->connect_errno ){
-       printf( "Connect failed: %s\n", $mysql->connect_error );
-       exit();
-   }
-   $result = $mysql->query( $sql );
-
-   echo '    <table id="listtable"><tbody>';   echo "\n";
-   echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
-
-   while ( $row = $result->fetch_assoc()){
-       if( $n%2 == 0 ){
-           printf("<tr>");
-       } else {
-           printf("<tr class=\"bggray\">");
-       }
+    while ( $row = $result->fetch_assoc()){
+        if( $n%2 == 0 ){
+            printf("<tr>");
+        } else {
+            printf("<tr class=\"bggray\">");
+        }
 
 // 以下のやりかたはまずい。
 // javascript でどのname.valueをとるのか判断できない
@@ -91,4 +100,37 @@ function ScanYoyaku(){
 
 }
 
+function PageLimit( $page ){
+    // ページの上限下限のチェック
+    global $MAXROWS;
+    $p = max( $page, 1); // マイナスページが指定された場合1を返す
+    $yoyaku = new YOYAKU();
+    $p = min( $page, ceil($yoyaku->maxnum() / $MAXROWS )); // 
+    return $p;
+}
+
+function Paging( $page ){
+    global $MAXROWS;
+
+    if( $page > 1 ){
+        $prevp = $page - 1;
+        $prev = '<a href="listview.php?page=' . $prevp . '">前のページ</a>';
+    } else {
+        $prev = '前のページ';
+    }
+
+    $yoyaku = new YOYAKU();
+    $maxpage = ceil($yoyaku->maxnum() / $MAXROWS );
+
+    if( $page < $maxpage ){
+        $nextp = $page + 1;
+        $next = '<a href="listview.php?page=' . $nextp . '">次のページ</a>';
+    } else {
+        $next = '次のページ';
+    }
+
+    $s = sprintf("<div id=\"caltitle\">\n  <div id=\"caltitle_l\">\n     %s\n  </div>\n  <div id=\"caltitle_c\">\n  </div>\n  <div id=\"caltitle_l\">\n     %s\n  </div>\n</div>",$prev, $next );
+
+    return $s;
+}
 ?>
