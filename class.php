@@ -193,7 +193,22 @@ class YOYAKU {
             exit();
         }
         $result = $mysql->query( $sql );
-        echo $sql;
+
+        $num = $result->num_rows;
+        return( $num );
+    }
+
+    function maxnum( ){
+        // 登録されている予約数を返す
+        global $DBSV, $DBUSER , $DBPASS , $DBNM;
+        $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
+        $sql = sprintf("select studentid from yoyaku;");
+        if( $mysql->connect_errno ){
+            printf( "Connect failed: %s\n", $mysql->connect_error );
+            exit();
+        }
+        $result = $mysql->query( $sql );
+
         $num = $result->num_rows;
         return( $num );
     }
