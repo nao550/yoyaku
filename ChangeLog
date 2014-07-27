@@ -1,3 +1,9 @@
+2014-07-28  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/listview.php: 
+	ページング機能を追加
+
+
 2014-07-27  IKENO Naoki  <nao@kyo-to.net>
 
 	* class.php (YOYAKU): 
