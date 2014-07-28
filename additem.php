@@ -95,7 +95,7 @@ if(! isset( $_GET['date'] )){
     <input type="text" id="studentnm" name="studentnm" />
     <br />
     <input type="hidden" name="mode" value="add">
-    <input type="hidden" name="yoyakunum" value="<?php echo CheckYoyaku( $date, $class ); ?>">
+    <input type="hidden" name="yoyakunum" value="<?php $yoyaku = new YOYAKU(); echo $yoyaku->num( date("Y-m-d",$date), $class ); ?>">
     <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
     <input type="submit" value="受講予約">
     <a href="index.php"><input type="button" value="戻る" /></a>
