@@ -58,7 +58,7 @@ function ScanYoyaku( $page ){
     $startrow = ( $page - 1)  * $MAXROWS;
 
     $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-    $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date limit  $startrow, $MAXROWS;";
+    $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class limit  $startrow, $MAXROWS;";
     
     if( $mysql->connect_errno ){
         printf( "Connect failed: %s\n", $mysql->connect_error );
@@ -76,20 +76,9 @@ function ScanYoyaku( $page ){
             printf("<tr class=\"bggray\">");
         }
 
-// 以下のやりかたはまずい。
-// javascript でどのname.valueをとるのか判断できない
-
-
        printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
               $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
-       printf('       <form action="listview.php" method="POST"  name="delchk" onSubmit="return delbt_click()" >' . "\n");
-
-       printf('         <input type="hidden" name="date" value="' . $row['date'] . '" />' . "\n");
-       printf('         <input type="hidden" name="class" value="' . $row['class'] . '" />' . "\n");
-       printf('         <input type="hidden" name="studentid" value="' . $row['studentid'] . '" />' . "\n");
-       printf('         <input type="hidden" name="studentnm" value="' . $row['studentnm'] . '" />' . "\n");
-       printf('         <input type="hidden" name="mdoe" value="delmode" />' . "\n");
-       printf('         <a href="listview.php?mode=del?cd=' . $row['cd'] . '"><input type="submit" value="削除" /></a></td></tr>' . "\n");
+       printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input type="submit" value="削除" /></a></td></tr>' . "\n");
        printf('       </form>' . "\n");
 
 

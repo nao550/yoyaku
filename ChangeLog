@@ -1,5 +1,8 @@
 2014-07-28  IKENO Naoki  <nao@kyo-to.net>
 
+	* admin/cancelitem.php (if): 
+	管理者削除機能の完成
+
 	* additem.php (if): 
 	YOYAKU クラス使うように修正
 
