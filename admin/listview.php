@@ -58,7 +58,7 @@ function ScanYoyaku( $page ){
     $startrow = ( $page - 1)  * $MAXROWS;
 
     $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-    $sql = "select date, class, studentid, studentnm from yoyaku order by date limit  $startrow, $MAXROWS;";
+    $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date limit  $startrow, $MAXROWS;";
     
     if( $mysql->connect_errno ){
         printf( "Connect failed: %s\n", $mysql->connect_error );
@@ -89,7 +89,7 @@ function ScanYoyaku( $page ){
        printf('         <input type="hidden" name="studentid" value="' . $row['studentid'] . '" />' . "\n");
        printf('         <input type="hidden" name="studentnm" value="' . $row['studentnm'] . '" />' . "\n");
        printf('         <input type="hidden" name="mdoe" value="delmode" />' . "\n");
-       printf('         <input type="submit" value="削除" /></td></tr>' . "\n");
+       printf('         <a href="listview.php?mode=del?cd=' . $row['cd'] . '"><input type="submit" value="削除" /></a></td></tr>' . "\n");
        printf('       </form>' . "\n");
 
 
