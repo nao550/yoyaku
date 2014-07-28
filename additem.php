@@ -6,8 +6,8 @@ if( isset( $_POST['mode'] )){
     if( $_POST['mode'] == 'add' ){
         $date = h( $_POST['date'] );
         $class = h( $_POST['class'] );
-        $studentid = h( $_POST['studentid'] );
-        $studentnm = h( $_POST['studentnm'] );
+        $id = h( $_POST['studentid'] );
+        $nm = h( $_POST['studentnm'] );
 
         $yoyaku = new YOYAKU();
         $yoyaku->add( $date, $class, $id, $nm );
