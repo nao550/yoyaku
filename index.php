@@ -23,6 +23,7 @@ if( isset( $_GET['month'] )){
   <div id="user_menu">
     <ul id="user_menu_ul">
       <li><a href="./admin/index.php">管理者画面</a></li>
+      <li><a href="./docs/user/_build/html/user_manual.html">マニュアル</a></li>
     </ul>
   </div>
 

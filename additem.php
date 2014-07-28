@@ -3,7 +3,16 @@ include 'config.php';
 include 'class.php';
 
 if( isset( $_POST['mode'] )){
-   add_yoyaku( h( $_POST ));
+    if( $_POST['mode'] == 'add' ){
+        $date = h( $_POST['date'] );
+        $class = h( $_POST['class'] );
+        $studentid = h( $_POST['studentid'] );
+        $studentnm = h( $_POST['studentnm'] );
+
+        $yoyaku = new YOYAKU();
+        $yoyaku->add( $date, $class, $id, $nm );
+        header("Location: index.php ");
+    }
 }
 
 if(! isset( $_GET['date'] )){
@@ -96,25 +105,4 @@ if(! isset( $_GET['date'] )){
 </body>
 </html>
 
-<?php
 
-function add_yoyaku( $POST ){
-
-   global $DBSV, $DBUSER , $DBPASS , $DBNM;
-
-   $date = h( $POST['date'] );
-   $class = h( $POST['class'] );
-   $studentid = h( $POST['studentid'] );
-   $studentnm = h( $POST['studentnm'] );
-   $regdate = date("Y-m-d H:i:s");
-
-   $sql = "insert into yoyaku ( date, class, studentid, studentnm, regdate ) value ( '$date', '$class', '$studentid', '$studentnm', '$regdate' )";
-
-   $link = mysqli_connect( $DBSV, $DBUSER , $DBPASS , $DBNM ) or die(mysqli_connect_error()); 
-    
-   mysqli_query( $link, $sql) or die(mysqli_error( $link ));
-
-}
-
-
-?>
