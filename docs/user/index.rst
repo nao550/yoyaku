@@ -1,4 +1,4 @@
-受講予約システムマニュアル
+講座予約システム利用者マニュアル
 ==========================================
 
 Contents:
@@ -7,7 +7,6 @@ Contents:
    :maxdepth: 2
 
    user_manual
-   admin_manual
 
 Indices and tables
 ==================

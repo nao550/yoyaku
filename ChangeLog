@@ -1,5 +1,9 @@
 2014-07-28  IKENO Naoki  <nao@kyo-to.net>
 
+	* docs/user/index.rst: 
+	ユーザマニュアルを追加
+	
+
 	* admin/listview.php: 
 	ページング機能を追加
 
