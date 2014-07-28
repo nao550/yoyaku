@@ -88,6 +88,26 @@ strong {
 
  }
 
+.listpage{ 
+    width: 800px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+ }
+
+.listpage_prev {  
+    width: 400px;
+    float: left;
+    text-align: left;
+ }
+
+.listpage_next {  
+    width: 390px;
+    float: left;
+    text-align: right;
+ }
+
+
 .jigen { 
     width: 180px;
  }

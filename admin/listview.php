@@ -118,7 +118,7 @@ function Paging( $page ){
         $next = '次のページ';
     }
 
-    $s = sprintf("<div id=\"caltitle\">\n  <div id=\"caltitle_l\">\n     %s\n  </div>\n  <div id=\"caltitle_c\">\n  </div>\n  <div id=\"caltitle_l\">\n     %s\n  </div>\n</div>",$prev, $next );
+    $s = sprintf("<div class=\"listpage\">\n  <div class=\"listpage_prev\">\n     %s\n  </div>\n  <div class=\"listpage_next\">\n     %s\n  </div>\n</div>\n\n",$prev, $next );
 
     return $s;
 }
