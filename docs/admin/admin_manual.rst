@@ -49,13 +49,12 @@
 [削除]ボタンを押すと「削除確認」の画面になります。
 
 
-.. image:: image/admin_day_02.png
-
+.. image:: image/admin_can_02.png
 
 [予約削除]のボタンをクリックすることで登録されている予約を削除することができます。
 
 
-.. image:: image/admin_day_03.png
+.. image:: image/admin_can_03.png
 
 「削除されました」というメッセージが表示されると削除が完了です。 
 [一覧へ戻る]をクリックすることで、学生一覧の画面に戻ります。
