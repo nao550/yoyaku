@@ -23,18 +23,51 @@ $page = PageLimit( $page );
 <head>
   <meta charset="utf-8">
   <title>管理画面</title>
-  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 </head>
 <body>
 
-<?php 
-    admin_menu_ul(); 
-?>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">受講予約</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.php">Home</a></li>
+          <li class="active"><a href="listview.php">学生一覧</a></li>
+	  <li><a href="checkday.php">日付設定</a></li>
+	  <li><a href="index.php?mode=destroy">ログオフ</a></li>
+	  <li><a href="../docs/admin/_build/html/index.html">マニュアル</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
 
-
-<h1>学生一覧表示</h1>
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
+      <h1 style="margin-top: 60px;">学生一覧表示</h1>
 
 
 <?php
@@ -44,7 +77,13 @@ echo $pagemove;
 ScanYoyaku( $page );
 echo $pagemove;
 ?>
+    </div>
+    <div class="col-sm-1" >
+    </div>
+  </div>
 
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
 </html>
 
@@ -78,7 +117,7 @@ function ScanYoyaku( $page ){
 
        printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
               $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
-       printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input type="submit" value="削除" /></a></td></tr>' . "\n");
+       printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
        printf('       </form>' . "\n");
 
 

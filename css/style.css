@@ -1,17 +1,7 @@
 
 body { 
     margin: 0 auto;
-    width: 800px;
     text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
- }
-
-h1 { 
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 140%;
-    font-weight: bold;
  }
 
 strong { 
@@ -89,21 +79,17 @@ strong {
  }
 
 .listpage{ 
-    width: 800px;
     padding-top: 5px;
     padding-bottom: 5px;
-
  }
 
 .listpage_prev {  
-    width: 400px;
     float: left;
     text-align: left;
  }
 
 .listpage_next {  
-    width: 390px;
-    float: left;
+    float: right;
     text-align: right;
  }
 
@@ -161,6 +147,7 @@ strong {
     font-weight: bold;
     font-size: 1.3em;
     line-height: 1.5em;
+    text-align: center;
     border-style: solid;
     border-width: 1px;
     border-color: black;

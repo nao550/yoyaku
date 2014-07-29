@@ -30,13 +30,51 @@ if( isset( $_GET['mode'] )){
 <head>
   <meta charset="utf-8">
   <title>予約キャンセル</title>
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/style.css">  
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
 </head>
 <body>
 
-<h1>削除確認</h1>
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">受講予約</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.php">Home</a></li>
+          <li class="active"><a href="listview.php">学生一覧</a></li>
+	  <li><a href="checkday.php">日付設定</a></li>
+	  <li><a href="index.php?mode=destroy">ログオフ</a></li>
+	  <li><a href="../docs/admin/_build/html/index.html">マニュアル</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+    <h1 style="margin-top: 60px;">削除確認</h1>
 
 <form action="cancelitem.php" method="GET" >
   <input type="text" name="date" size="15" value="<?php echo $date ?>" readonly /><br />
@@ -64,6 +102,12 @@ if( isset( $mode ) && $mode == "del" ){
 
 
 ?>
+</div>
+    <div class="col-sm-2">
+    </div>
+      </div>
+   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
 </body>
 </html>
