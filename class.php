@@ -35,7 +35,7 @@ function calender( $ymd = ""){
     //以上でデータは出来上がった
  
     //カレンダーを表示する
-    echo '<table id="yoyakucal">';
+    echo '<table id="yoyakucal" class="table table-bordered">';
     //見出し
     echo '<tr><th class="jigen">時限</th><th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th></tr>' ;
     echo "\n";

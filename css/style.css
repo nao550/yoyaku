@@ -131,6 +131,7 @@ strong {
 .classtime { 
     border-style: solid;
     border-width: 1px;
+    border-color: #ddd;
     text-align: left;   
     line-height: 1.3em;
     padding: 5px;
@@ -140,6 +141,7 @@ strong {
 .classtime_t { 
     border-style: solid;
     border-width: 1px;
+    border-color: #ddd;
     padding: 5px;
     text-align: left;   
     line-height: 1.3em;
