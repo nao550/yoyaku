@@ -44,8 +44,6 @@ if( isset( $_POST['user'] ) and isset( $_POST['password'] )){
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/style.css">  
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
