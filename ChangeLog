@@ -1,5 +1,8 @@
 2014-07-29  IKENO Naoki  <nao@kyo-to.net>
 
+	* admin/index.php: 
+	Bootstrap の適用
+
 	* additem.php:
 	Bootstrap の適用
 	フォームへ名前、学籍番号入力ができているかの確認する
