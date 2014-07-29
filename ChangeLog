@@ -4,6 +4,8 @@
 	Bootstrap の適用
 	フォームへ名前、学籍番号入力ができているかの確認する
 	javascriptを追加
+	(CancelClick): 
+	学生画面へのbootstrapの適用
 
 	* css/style.css: 
 	* index.php:

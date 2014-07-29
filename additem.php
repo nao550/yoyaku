@@ -92,7 +92,7 @@ if(! isset( $_GET['date'] )){
             return false;
         }            
 
-	    if( window.confirm( DATE + CLASS + "\n" + "学籍番号：" + STUDENTID + " 氏名：" + STUDENTNM + "\nの申込をキャンセルしますか？")){
+	    if( window.confirm( DATE + "\n" +  CLASS + "時限\n" + "学籍番号：" + STUDENTID + "\n氏名：" + STUDENTNM + "\nの申込をキャンセルしますか？")){
 		// キャンセル実行
 		location.href="./cancelitem.php?date=" + DATE + "&class=" + CLASS + "&studentid=" + STUDENTID + "&studentnm=" + STUDENTNM;
 	    }
