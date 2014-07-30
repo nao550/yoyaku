@@ -99,6 +99,7 @@ if( isset( $_GET['month'] )){
     <div class="col-sm-2">
     </div>
   </div>
+
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
