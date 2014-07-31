@@ -28,11 +28,10 @@ $page = PageLimit( $page );
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
   <!-- Optional theme -->
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
   <!-- Latest compiled and minified JavaScript -->
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -105,6 +104,7 @@ echo $pagemove;
 
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
 
@@ -129,6 +129,8 @@ function ScanYoyaku( $page ){
     echo '    <table id="listtable"><tbody>';   echo "\n";
     echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
 
+    if( $result->fetch_row() > 0 ){
+
     while ( $row = $result->fetch_assoc()){
         if( $n%2 == 0 ){
             printf("<tr>");
@@ -141,9 +143,8 @@ function ScanYoyaku( $page ){
        printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
        printf('       </form>' . "\n");
 
-
-
        $n++;
+       } 
    }
    echo "    </tbody></table>\n";
 

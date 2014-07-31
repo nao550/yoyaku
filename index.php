@@ -20,6 +20,8 @@ if( isset( $_GET['month'] )){
   <link rel="stylesheet" href="css/style.css">  
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="./css/navbar-fixed-top.css" rel="stylesheet">
   <!-- Optional theme -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <!-- Latest compiled and minified JavaScript -->
@@ -42,6 +44,7 @@ if( isset( $_GET['month'] )){
         </button>
         <a class="navbar-brand" href="#">受講予約</a>
       </div>
+
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
@@ -50,21 +53,30 @@ if( isset( $_GET['month'] )){
         </ul>
       </div><!--/.nav-collapse -->
     </div>
+
   </div>
 
   <div class="container">
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-10">
       <div class="starter-template">
 	<h1 style="margin-top: 60px;">
 	  <?php
 	     echo $SITETITLE; 
 	     ?>
 	</h1>
+      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
 
-	<div id="caltitle">
-	  <div id="caltitle_l">
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-3" style="text-align: left;">
+
 <?php
        $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
        $last = date("Y年m月", $lastmonth);
@@ -74,33 +86,43 @@ if( isset( $_GET['month'] )){
        echo $last;
    }
 ?>
-	  </div>
+    </div>
+    <div class="col-sm-4">
 
-	  <div id="caltitle_c">
 <?php
    $nowmonth = date("Y年m月", $month);
    echo $nowmonth;
 ?>
-	  </div>
 
-	  <div id="caltitle_r">
+    </div>
+    <div class="col-sm-3" style="text-align: right;">
+
+
 <?php
    $nextmonth = mktime(0, 0, 0, date("m",$month) +1, date("d", $month), date("Y",$month));
    $next = date("Y年m月", $nextmonth);
    echo '<a href="index.php?month=' . $nextmonth . '">' . $next .'</a>';
 ?>
-	  </div>
-	</div>
+
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
 
       <?php calender($month); ?>
-      </div>
+
     </div>
-    
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
   </div>
 
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>

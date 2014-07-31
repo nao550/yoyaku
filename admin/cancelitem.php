@@ -96,7 +96,7 @@ if( isset( $mode ) && $mode == "del" ){
     }
 } elseif( $mode == "delitem" ){
     echo "削除されました。<br />";
-    echo '<a href="listview.php"><input type="button" value="一覧へ戻る" ></a>';
+    echo "<input type=\"button\" value=\"一覧へ戻る\" onclick=\"location.href='listview.php'\" >";
     echo '</form>';
 }        
 
@@ -108,6 +108,6 @@ if( isset( $mode ) && $mode == "del" ){
       </div>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+    <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>

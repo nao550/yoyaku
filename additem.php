@@ -150,7 +150,7 @@ if(! isset( $_GET['date'] )){
     <input type="hidden" name="yoyakunum" value="<?php $yoyaku = new YOYAKU(); echo $yoyaku->num( date("Y-m-d",$date), $class ); ?>">
     <input type="hidden" name="yoyakumax" value="<?php echo $RESVMAX; ?>">
     <input type="submit" value="受講予約">
-    <a href="index.php"><input type="button" value="戻る" /></a>
+    <input type="button" value="戻る" onclick="location.href='index.php'" />
     <input type="button" value="予約キャンセル" onclick="CancelClick()" />
   </form>
         
@@ -160,7 +160,7 @@ if(! isset( $_GET['date'] )){
         </div>
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
+    <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>
 
