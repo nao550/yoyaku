@@ -107,6 +107,8 @@ function ScanYoyaku( $page ){
     echo '    <table id="listtable"><tbody>';   echo "\n";
     echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
 
+    if( $result->fetch_row() > 0 ){
+
     while ( $row = $result->fetch_assoc()){
         if( $n%2 == 0 ){
             printf("<tr>");
@@ -119,9 +121,8 @@ function ScanYoyaku( $page ){
        printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
        printf('       </form>' . "\n");
 
-
-
        $n++;
+       } 
    }
    echo "    </tbody></table>\n";
 
