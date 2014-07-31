@@ -48,8 +48,6 @@ if( isset( $_GET['mode'] )){
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <!-- Optional theme -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -81,13 +79,20 @@ if( isset( $_GET['mode'] )){
   </div>
   
   <div class="container">
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-10">
       <h1 style="margin-top: 60px;" >予約可能日設定</h1>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
 
-      <div id="caltitle">
-	<div id="caltitle_l">
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-3" style="text-align; left;">
+
 <?php
        $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
        $last = date("Y年m月", $lastmonth);
@@ -97,25 +102,33 @@ if( isset( $_GET['mode'] )){
        echo $last;
    }
 ?>
-	</div>
+    </div>
+    <div class="col-sm-4">
 
-	<div id="caltitle_c">
 <?php
    $nowmonth = date("Y年m月", $month);
    echo $nowmonth;
 ?>
-	</div>
+    </div>
+    <div class="col-sm-3">
 
-	<div id="caltitle_r">
 <?php
    $nextmonth = mktime(0, 0, 0, date("m",$month) +1, date("d", $month), date("Y",$month));
    $next = date("Y年m月", $nextmonth);
    echo '<a href="checkday.php?month=' . $nextmonth . '">' . $next .'</a>';
 ?>
-	</div>
-      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
 
       <?php chk_calender( $month ); ?>
+
     </div>
     <div class="col-sm-2">
     </div>
@@ -123,6 +136,7 @@ if( isset( $_GET['mode'] )){
       
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
 

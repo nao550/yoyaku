@@ -44,6 +44,7 @@ if( isset( $_GET['month'] )){
         </button>
         <a class="navbar-brand" href="#">受講予約</a>
       </div>
+
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Home</a></li>
@@ -52,6 +53,7 @@ if( isset( $_GET['month'] )){
         </ul>
       </div><!--/.nav-collapse -->
     </div>
+
   </div>
 
   <div class="container">
@@ -121,5 +123,6 @@ if( isset( $_GET['month'] )){
 
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>
