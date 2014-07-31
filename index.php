@@ -20,6 +20,8 @@ if( isset( $_GET['month'] )){
   <link rel="stylesheet" href="css/style.css">  
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link href="./css/navbar-fixed-top.css" rel="stylesheet">
   <!-- Optional theme -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
   <!-- Latest compiled and minified JavaScript -->
@@ -71,7 +73,7 @@ if( isset( $_GET['month'] )){
   <div class="container">
     <div class="col-sm-1">
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-3" style="text-align: left;">
 
 <?php
        $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
@@ -83,14 +85,16 @@ if( isset( $_GET['month'] )){
    }
 ?>
     </div>
-    <div class="col-sm-8">
-    </div>
-    <div class="col-sm-1">
+    <div class="col-sm-4">
 
 <?php
    $nowmonth = date("Y年m月", $month);
    echo $nowmonth;
 ?>
+
+    </div>
+    <div class="col-sm-3" style="text-align: right;">
+
 
 <?php
    $nextmonth = mktime(0, 0, 0, date("m",$month) +1, date("d", $month), date("Y",$month));
