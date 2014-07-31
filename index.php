@@ -53,18 +53,26 @@ if( isset( $_GET['month'] )){
   </div>
 
   <div class="container">
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-10">
       <div class="starter-template">
 	<h1 style="margin-top: 60px;">
 	  <?php
 	     echo $SITETITLE; 
 	     ?>
 	</h1>
+      </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
 
-	<div id="caltitle">
-	  <div id="caltitle_l">
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-1">
+
 <?php
        $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
        $last = date("Y年m月", $lastmonth);
@@ -74,29 +82,36 @@ if( isset( $_GET['month'] )){
        echo $last;
    }
 ?>
-	  </div>
+    </div>
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-1">
 
-	  <div id="caltitle_c">
 <?php
    $nowmonth = date("Y年m月", $month);
    echo $nowmonth;
 ?>
-	  </div>
 
-	  <div id="caltitle_r">
 <?php
    $nextmonth = mktime(0, 0, 0, date("m",$month) +1, date("d", $month), date("Y",$month));
    $next = date("Y年m月", $nextmonth);
    echo '<a href="index.php?month=' . $nextmonth . '">' . $next .'</a>';
 ?>
-	  </div>
-	</div>
+
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
 
       <?php calender($month); ?>
-      </div>
+
     </div>
-    
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
   </div>
 
