@@ -68,6 +68,28 @@ $page = PageLimit( $page );
     </div>
     <div class="col-sm-10">
       <h1 style="margin-top: 60px;">学生一覧表示</h1>
+    </div>
+    <div class="col-sm-1">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8" style="text-align: left;">
+    <input type="radio" name="SetTime" value="Today" />本日の予約<br />
+    <input type="radio" name="SetTime" value="AllTime" />全期間<br />
+    <input type="radio" name="SetTime" value="TimePeriod" />範囲指定<br />
+    </div>
+    <div class="col-sm-2">
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
+
 
 <?php
 $pagemove = Paging( $page );
