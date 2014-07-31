@@ -96,7 +96,7 @@ if( isset( $mode ) && $mode == "del" ){
     }
 } elseif( $mode == "delitem" ){
     echo "削除されました。<br />";
-    echo '<a href="listview.php"><input type="button" value="一覧へ戻る" ></a>';
+    echo '<input type="button" value="一覧へ戻る" onclick="location.href='listview.php'" >';
     echo '</form>';
 }        
 
