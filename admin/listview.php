@@ -69,7 +69,6 @@ $page = PageLimit( $page );
     <div class="col-sm-10">
       <h1 style="margin-top: 60px;">学生一覧表示</h1>
 
-
 <?php
 $pagemove = Paging( $page );
 
