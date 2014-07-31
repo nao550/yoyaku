@@ -167,3 +167,8 @@ strong {
 .bggray { 
     background-color: lightgray;
  }          
+
+input[type=text] { 
+    height: 30px;
+    margin-top: 3px;
+]
