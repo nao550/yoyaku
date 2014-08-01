@@ -14,7 +14,23 @@ if( isset( $_GET['page'] )){
     $page = 1;
 }
 
-$page = PageLimit( $page );
+
+$DayMode = "";
+$StartDay = "";
+$EndDay = "";
+
+if( isset( $_GET['mode'] )){
+   if( $_GET['mode'] == "daychange" ){
+       $DayMode = h( $_GET['SetTime'] );
+       $StartDay = h( $_GET['StartDay'] );
+       $EndDay = h( $_GET['EndDay'] );
+   }
+} else {
+    echo 
+    $DayMode = 'AllTime';
+}
+
+//$page = PageLimit( $page, $DayMode, $StartDay, $EndDay );
         
 ?>
 <!DOCTYPE html>
@@ -75,9 +91,14 @@ $page = PageLimit( $page );
     <div class="col-sm-2">
     </div>
     <div class="col-sm-8" style="text-align: left;">
-    <input type="radio" name="SetTime" value="Today" />本日の予約<br />
-    <input type="radio" name="SetTime" value="AllTime" />全期間<br />
-    <input type="radio" name="SetTime" value="TimePeriod" />範囲指定<br />
+    <form action="listview.php" method="GET" name="DayRange" >
+      <input type="radio" name="SetTime" value="AllTime" checked/>全期間<br />
+      <input type="radio" name="SetTime" value="Today" />本日の予約<br />
+      <input type="radio" name="SetTime" value="TimePeriod" />範囲指定<br />
+      <input type="text" name="StartDay" value="" placeholder="表示開始日" />-<input type="text" name="EndDay"  value="" placeholder="表示終了日" /><br />
+      <input type="hidden" name="mode" value="daychange" />
+      <input type="submit" value="変更" />
+    </form>
     </div>
     <div class="col-sm-2">
     </div>
@@ -90,10 +111,11 @@ $page = PageLimit( $page );
 
 
 <?php
-$pagemove = Paging( $page );
+    $pagemove = Paging( $page );
 
 echo $pagemove;
-ScanYoyaku( $page );
+echo $DayMode;
+ScanYoyaku( $page, $DayMode );
 echo $pagemove;
 ?>
     </div>
@@ -111,39 +133,47 @@ echo $pagemove;
 
 <?php
 
-function ScanYoyaku( $page ){
+    function ScanYoyaku( $page, $DayMode = 'AllTime', $StartDay = '', $EndDay = '' ){
     global $DBSV, $DBUSER , $DBPASS , $DBNM, $MAXROWS;
     $n = 1;
     $startrow = ( $page - 1)  * $MAXROWS;
 
     $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
-    $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class limit  $startrow, $MAXROWS;";
-    
     if( $mysql->connect_errno ){
         printf( "Connect failed: %s\n", $mysql->connect_error );
         exit();
     }
+
+    if( $DayMode == "AllTime" ){
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class limit  $startrow, $MAXROWS;";
+    } elseif( $DayMode == "Today" ){
+        $today = date("Y-m-d",time());
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date = '$today' order by date, class limit  $startrow, $MAXROWS";
+    } elseif( $DayMode == "TimePeriod" ){
+        $EndDay = $EndDay; // $EndDay にプラス1日する
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class limit  $startrow, $MAXROWS;";        
+    } 
+
+    echo $sql;
     $result = $mysql->query( $sql );
 
     echo '    <table id="listtable"><tbody>';   echo "\n";
     echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
 
-    if( $result->fetch_row() > 0 ){
+    if( $result->fetch_row() != NULL ){
+        while ( $row = $result->fetch_assoc()){
+            if( $n%2 == 0 ){
+                printf("<tr>");
+            } else {
+                printf("<tr class=\"bggray\">");
+            }
 
-    while ( $row = $result->fetch_assoc()){
-        if( $n%2 == 0 ){
-            printf("<tr>");
-        } else {
-            printf("<tr class=\"bggray\">");
-        }
-
-       printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
-              $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
-       printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
-       printf('       </form>' . "\n");
-
-       $n++;
-       } 
+            printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
+                   $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
+            printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
+            printf('       </form>' . "\n");
+            $n++;
+        } 
    }
    echo "    </tbody></table>\n";
 

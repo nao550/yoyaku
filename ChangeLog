@@ -1,3 +1,11 @@
+2014-08-02  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/listview.php: 
+	全期間のデータを表示することはできるようになった。
+	全期間のデータを表示してページングはできない。
+
+	today のときにデータが出ない原因が不明。
+
 2014-07-31  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/checkday.php: 
