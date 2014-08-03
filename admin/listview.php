@@ -26,11 +26,9 @@ if( isset( $_GET['mode'] )){
        $EndDay = h( $_GET['EndDay'] );
    }
 } else {
-    echo 
     $DayMode = 'AllTime';
 }
 
-//$page = PageLimit( $page, $DayMode, $StartDay, $EndDay );
         
 ?>
 <!DOCTYPE html>
@@ -42,15 +40,26 @@ if( isset( $_GET['mode'] )){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-  <!-- Latest compiled and minified JavaScript -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../js/themes/blue/style.css">  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.tablesorter.js"></script>
+  <script type="text/javascript" src="../js/addons/pager/jquery.tablesorter.pager.js"></script>
+
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+  <script type="text/javascript">
+    $(document).ready(function(){
+            $("#listtable")
+                .tablesorter({widthFixed: true, widgets: ['zebra']})
+                .tablesorterPager({container: $("#paging")});
+    }); 
+  </script>
+
+
 </head>
 <body>
 
@@ -87,6 +96,7 @@ if( isset( $_GET['mode'] )){
     </div>
   </div>
 
+<!--
   <div class="container">
     <div class="col-sm-2">
     </div>
@@ -103,29 +113,41 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-2">
     </div>
   </div>
-
+-->
   <div class="container">
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
 
-
 <?php
-    $pagemove = Paging( $page );
-
-echo $pagemove;
-echo $DayMode;
 ScanYoyaku( $page, $DayMode );
-echo $pagemove;
 ?>
+      <div id="paging" class="paging" style="float: left;">
+	<form>
+	  <img src="../js/addons/pager/icons/first.png" class="first"/>
+	  <img src="../js/addons/pager/icons/prev.png" class="prev"/>
+	  <input type="text" class="pagedisplay"/>
+	  <img src="../js/addons/pager/icons/next.png" class="next"/>
+	  <img src="../js/addons/pager/icons/last.png" class="last"/>
+	  <select class="pagesize">
+	    <option value="10">10</option>
+	    <option  selected="selected" value="20">20</option>
+	    <option value="30">30</option>
+	    <option value="40">40</option>
+	    <option value="50">50</option>
+	  </select>
+	</form>
+      </div>
+
+
     </div>
     <div class="col-sm-1" >
     </div>
   </div>
 
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="../js/bootstrap.min.js"></script>
+   
 </body>
 </html>
 
@@ -145,29 +167,24 @@ echo $pagemove;
     }
 
     if( $DayMode == "AllTime" ){
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class limit  $startrow, $MAXROWS;";
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class;";
     } elseif( $DayMode == "Today" ){
         $today = date("Y-m-d",time());
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date = '$today' order by date, class limit  $startrow, $MAXROWS";
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >= '$today' order by date, class;";
     } elseif( $DayMode == "TimePeriod" ){
         $EndDay = $EndDay; // $EndDay にプラス1日する
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class limit  $startrow, $MAXROWS;";        
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class;";        
     } 
 
-    echo $sql;
+    echo "<!-- $sql -->";
     $result = $mysql->query( $sql );
 
-    echo '    <table id="listtable"><tbody>';   echo "\n";
-    echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n";
+    echo '    <table id="listtable" class="tablesorter" cellspacing="1"><thead>';   echo "\n";
+    echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n</thead><tbody>";
 
     if( $result->fetch_row() != NULL ){
         while ( $row = $result->fetch_assoc()){
-            if( $n%2 == 0 ){
-                printf("<tr>");
-            } else {
-                printf("<tr class=\"bggray\">");
-            }
-
+            printf("<tr>");
             printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
                    $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
             printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
@@ -176,7 +193,6 @@ echo $pagemove;
         } 
    }
    echo "    </tbody></table>\n";
-
 }
 
 function PageLimit( $page ){
