@@ -130,8 +130,8 @@ ScanYoyaku( $page, $DayMode );
 	  <img src="../js/addons/pager/icons/next.png" class="next"/>
 	  <img src="../js/addons/pager/icons/last.png" class="last"/>
 	  <select class="pagesize">
-	    <option selected="selected"  value="10">10</option>
-	    <option value="20">20</option>
+	    <option value="10">10</option>
+	    <option  selected="selected" value="20">20</option>
 	    <option value="30">30</option>
 	    <option value="40">40</option>
 	    <option value="50">50</option>
@@ -167,13 +167,13 @@ ScanYoyaku( $page, $DayMode );
     }
 
     if( $DayMode == "AllTime" ){
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class limit  $startrow, $MAXROWS;";
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class;";
     } elseif( $DayMode == "Today" ){
         $today = date("Y-m-d",time());
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >= '$today' order by date, class limit  $startrow, $MAXROWS";
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >= '$today' order by date, class;";
     } elseif( $DayMode == "TimePeriod" ){
         $EndDay = $EndDay; // $EndDay にプラス1日する
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class limit  $startrow, $MAXROWS;";        
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class;";        
     } 
 
     echo $sql;
