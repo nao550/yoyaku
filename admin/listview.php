@@ -145,6 +145,7 @@ ScanYoyaku( $page, $DayMode );
     </div>
   </div>
 
+
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="../js/bootstrap.min.js"></script>
    
