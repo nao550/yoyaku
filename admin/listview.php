@@ -29,7 +29,6 @@ if( isset( $_GET['mode'] )){
     $DayMode = 'AllTime';
 }
 
-//$page = PageLimit( $page, $DayMode, $StartDay, $EndDay );
         
 ?>
 <!DOCTYPE html>
@@ -97,6 +96,7 @@ if( isset( $_GET['mode'] )){
     </div>
   </div>
 
+<!--
   <div class="container">
     <div class="col-sm-2">
     </div>
@@ -113,7 +113,7 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-2">
     </div>
   </div>
-
+-->
   <div class="container">
     <div class="col-sm-1">
     </div>
@@ -122,7 +122,7 @@ if( isset( $_GET['mode'] )){
 <?php
 ScanYoyaku( $page, $DayMode );
 ?>
-      <div id="paging" class="paging">
+      <div id="paging" class="paging" style="float: left;">
 	<form>
 	  <img src="../js/addons/pager/icons/first.png" class="first"/>
 	  <img src="../js/addons/pager/icons/prev.png" class="prev"/>
@@ -145,9 +145,9 @@ ScanYoyaku( $page, $DayMode );
     </div>
   </div>
 
-
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="../js/bootstrap.min.js"></script>
+   
 </body>
 </html>
 
@@ -176,7 +176,7 @@ ScanYoyaku( $page, $DayMode );
         $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class;";        
     } 
 
-    echo $sql;
+    echo "<!-- $sql -->";
     $result = $mysql->query( $sql );
 
     echo '    <table id="listtable" class="tablesorter" cellspacing="1"><thead>';   echo "\n";
