@@ -21,7 +21,7 @@
 					var c = table.config, o = $(table);
 					if(o.offset) {
 						c.container.css({
-							top: o.offset().top + o.height() + 'px',
+							//top: o.offset().top + o.height() + 'px',
 							position: 'absolute'
 						});
 					}

@@ -56,7 +56,7 @@ if( isset( $_GET['mode'] )){
     $(document).ready(function(){
             $("#listtable")
                 .tablesorter({widthFixed: true, widgets: ['zebra']})
-                .tablesorterPager({container: $("#pager")});
+                .tablesorterPager({container: $("#paging")});
     }); 
   </script>
 
@@ -119,19 +119,32 @@ if( isset( $_GET['mode'] )){
     </div>
     <div class="col-sm-10">
 
-
 <?php
-    $pagemove = Paging( $page );
-
-echo $pagemove;
-echo $DayMode;
 ScanYoyaku( $page, $DayMode );
-echo $pagemove;
 ?>
+      <div id="paging" class="paging">
+	<form>
+	  <img src="../js/addons/pager/icons/first.png" class="first"/>
+	  <img src="../js/addons/pager/icons/prev.png" class="prev"/>
+	  <input type="text" class="pagedisplay"/>
+	  <img src="../js/addons/pager/icons/next.png" class="next"/>
+	  <img src="../js/addons/pager/icons/last.png" class="last"/>
+	  <select class="pagesize">
+	    <option selected="selected"  value="10">10</option>
+	    <option value="20">20</option>
+	    <option value="30">30</option>
+	    <option value="40">40</option>
+	    <option value="50">50</option>
+	  </select>
+	</form>
+      </div>
+
+
     </div>
     <div class="col-sm-1" >
     </div>
   </div>
+
 
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="../js/bootstrap.min.js"></script>
@@ -180,24 +193,6 @@ echo $pagemove;
         } 
    }
    echo "    </tbody></table>\n";
-print <<< EOF
-<div id="pager" class="pager">
-<form>
-<img src="../js/addons/pager/icons/first.png" class="first"/>
-<img src="../js/addons/pager/icons/prev.png" class="prev"/>
-<input type="text" class="pagedisplay"/>
-<img src="../js/addons/pager/icons/next.png" class="next"/>
-<img src="../js/addons/pager/icons/last.png" class="last"/>
-<select class="pagesize">
-<option selected="selected"  value="10">10</option>
-<option value="20">20</option>
-<option value="30">30</option>
-<option  value="40">40</option>
-</select>
-</form>
-</div>
-EOF;
-
 }
 
 function PageLimit( $page ){
