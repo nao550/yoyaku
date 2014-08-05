@@ -96,7 +96,7 @@ if( isset( $_GET['mode'] )){
     </div>
   </div>
 
-<!--
+
   <div class="container">
     <div class="col-sm-2">
     </div>
@@ -113,7 +113,7 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-2">
     </div>
   </div>
--->
+
   <div class="container">
     <div class="col-sm-1">
     </div>
