@@ -96,10 +96,10 @@ if( isset( $_GET['mode'] )){
     </div>
     <div class="col-sm-8" style="text-align: left;">
     <form action="listview.php" method="GET" name="DayRange" >
-      <input type="radio" name="SetTime" value="AllTime" checked/>全期間<br />
-      <input type="radio" name="SetTime" value="Today" />本日の予約<br />
-      <input type="radio" name="SetTime" value="TimePeriod" />範囲指定<br />
-      <input type="text" name="StartDay" value="" placeholder="表示開始日" />-<input type="text" name="EndDay"  value="" placeholder="表示終了日" /><br />
+    <input type="radio" name="SetTime" value="AllTime" <?php if($DayMode == "AllTime"){ echo "checked"; } ?> />全期間<br />
+      <input type="radio" name="SetTime" value="Today"  <?php if($DayMode == "Today"){ echo "checked"; } ?> />本日の予約<br />
+      <input type="radio" name="SetTime" value="TimePeriod"  <?php if($DayMode == "TimePeriod"){ echo "checked"; } ?> />範囲指定
+      <input type="text" name="StartDay" value="<?php echo date("Y-m-d") ?>" />-<input type="text" name="EndDay"  value="<?php echo date("Y-m-d",mktime(0,0,0,date("m"),date("d") + 10, date("Y")));  ?>" /><br />
       <input type="hidden" name="mode" value="daychange" />
       <input type="submit" value="変更" />
     </form>
@@ -114,7 +114,7 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-10">
 
 <?php
-ScanYoyaku( $DayMode );
+    ScanYoyaku( $DayMode, $StartDay, $EndDay );
 ?>
       <div id="paging" class="paging" style="float: left;">
 	<form>
@@ -164,7 +164,7 @@ ScanYoyaku( $DayMode );
         $sql = "select cd, date, class, studentid, studentnm from yoyaku where date = DATE(NOW()) order by date, class;";
     } elseif( $DayMode == "TimePeriod" ){
         $EndDay = $EndDay; // $EndDay にプラス1日する
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class;";        
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date <= '$EndDay' order by date, class;";        
     } 
 
     echo "<!-- $sql -->";
