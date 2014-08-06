@@ -8,12 +8,6 @@ if( empty( $_SESSION['user'] ) or ( $_SESSION['user'] != $ADMINNM )){
     header("Location: index.php");
 }
 
-if( isset( $_GET['page'] )){
-    $page = h( $_GET['page'] );
-} else {
-    $page = 1;
-}
-
 
 $DayMode = "";
 $StartDay = "";
@@ -145,7 +139,6 @@ ScanYoyaku( $page, $DayMode );
     </div>
   </div>
 
-
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
    <script src="../js/bootstrap.min.js"></script>
    
@@ -156,10 +149,8 @@ ScanYoyaku( $page, $DayMode );
 
 <?php
 
-    function ScanYoyaku( $page, $DayMode = 'AllTime', $StartDay = '', $EndDay = '' ){
+    function ScanYoyaku( $DayMode = 'AllTime', $StartDay = '', $EndDay = '' ){
     global $DBSV, $DBUSER , $DBPASS , $DBNM, $MAXROWS;
-    $n = 1;
-    $startrow = ( $page - 1)  * $MAXROWS;
 
     $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
     if( $mysql->connect_errno ){
@@ -196,37 +187,4 @@ ScanYoyaku( $page, $DayMode );
    echo "    </tbody></table>\n";
 }
 
-function PageLimit( $page ){
-    // ページの上限下限のチェック
-    global $MAXROWS;
-    $p = max( $page, 1); // マイナスページが指定された場合1を返す
-    $yoyaku = new YOYAKU();
-    $p = min( $page, ceil($yoyaku->maxnum() / $MAXROWS )); // 
-    return $p;
-}
-
-function Paging( $page ){
-    global $MAXROWS;
-
-    if( $page > 1 ){
-        $prevp = $page - 1;
-        $prev = '<a href="listview.php?page=' . $prevp . '">前のページ</a>';
-    } else {
-        $prev = '前のページ';
-    }
-
-    $yoyaku = new YOYAKU();
-    $maxpage = ceil($yoyaku->maxnum() / $MAXROWS );
-
-    if( $page < $maxpage ){
-        $nextp = $page + 1;
-        $next = '<a href="listview.php?page=' . $nextp . '">次のページ</a>';
-    } else {
-        $next = '次のページ';
-    }
-
-    $s = sprintf("<div class=\"listpage\">\n  <div class=\"listpage_prev\">\n     %s\n  </div>\n  <div class=\"listpage_next\">\n     %s\n  </div>\n</div>\n\n",$prev, $next );
-
-    return $s;
-}
 ?>
