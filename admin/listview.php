@@ -114,7 +114,7 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-10">
 
 <?php
-ScanYoyaku( $page, $DayMode );
+ScanYoyaku( $DayMode );
 ?>
       <div id="paging" class="paging" style="float: left;">
 	<form>
@@ -161,8 +161,7 @@ ScanYoyaku( $page, $DayMode );
     if( $DayMode == "AllTime" ){
         $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class;";
     } elseif( $DayMode == "Today" ){
-        $today = date("Y-m-d",time());
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >= '$today' order by date, class;";
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date = DATE(NOW()) order by date, class;";
     } elseif( $DayMode == "TimePeriod" ){
         $EndDay = $EndDay; // $EndDay にプラス1日する
         $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date < '$EndDay' order by date, class;";        
@@ -174,14 +173,13 @@ ScanYoyaku( $page, $DayMode );
     echo '    <table id="listtable" class="tablesorter" cellspacing="1"><thead>';   echo "\n";
     echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n</thead><tbody>";
 
-    if( $result->fetch_row() != NULL ){
+    if( $result->num_rows != NULL ){
         while ( $row = $result->fetch_assoc()){
             printf("<tr>");
             printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
                    $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
             printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
             printf('       </form>' . "\n");
-            $n++;
         } 
    }
    echo "    </tbody></table>\n";
