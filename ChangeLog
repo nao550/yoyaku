@@ -1,3 +1,9 @@
+2014-08-07  IKENO Naoki  <nao@kyo-to.net>
+
+	* docs/admin/admin_manual.rst: 
+	今日のデータ、日付範囲の指定、などが出来るようになった。
+	マニュアルの追加
+
 2014-08-04  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/listview.php: 
