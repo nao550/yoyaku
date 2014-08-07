@@ -99,7 +99,19 @@ if( isset( $_GET['mode'] )){
     <input type="radio" name="SetTime" value="AllTime" <?php if($DayMode == "AllTime"){ echo "checked"; } ?> />全期間<br />
       <input type="radio" name="SetTime" value="Today"  <?php if($DayMode == "Today"){ echo "checked"; } ?> />本日の予約<br />
       <input type="radio" name="SetTime" value="TimePeriod"  <?php if($DayMode == "TimePeriod"){ echo "checked"; } ?> />範囲指定
-      <input type="text" name="StartDay" value="<?php echo date("Y-m-d") ?>" />-<input type="text" name="EndDay"  value="<?php echo date("Y-m-d",mktime(0,0,0,date("m"),date("d") + 10, date("Y")));  ?>" /><br />
+      <input type="text" name="StartDay" value="<?php 
+if( $DayMode == "TimePeriod" ){
+    echo $StartDay;
+} else {
+    echo date("Y-m-d");
+}
+?>" />-<input type="text" name="EndDay"  value="<?php 
+if( $DayMode == "TimePeriod" ){
+    echo $EndDay;
+} else {
+    echo date("Y-m-d",mktime(0,0,0,date("m"),date("d") + 10, date("Y")));
+}
+?>" /><br />
       <input type="hidden" name="mode" value="daychange" />
       <input type="submit" value="変更" />
     </form>

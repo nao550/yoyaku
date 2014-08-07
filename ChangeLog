@@ -1,5 +1,8 @@
 2014-08-07  IKENO Naoki  <nao@kyo-to.net>
 
+	* admin/listview.php: 
+	日付の範囲を指定したときに画面が遷移しても日付を保持するように修正
+
 	* docs/admin/admin_manual.rst: 
 	今日のデータ、日付範囲の指定、などが出来るようになった。
 	マニュアルの追加
