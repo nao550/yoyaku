@@ -69,8 +69,8 @@ if( isset( $_GET['mode'] )){
 	<ul class="nav navbar-nav">
 	  <li><a href="../index.php">Home</a></li>
           <li><a href="listview.php">予約一覧</a></li>
-          <li><a href="studentlist.php">受講履歴</a></li>
-	  <li class="active"><a href="checkday.php">日付設定</a></li>
+          <li class="active"><a href="studentlist.php">受講履歴</a></li>
+	  <li><a href="checkday.php">日付設定</a></li>
 	  <li><a href="index.php?mode=destroy">ログオフ</a></li>
 	  <li><a href="../docs/admin/_build/html/index.html">マニュアル</a></li>
         </ul>
@@ -82,55 +82,21 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
-      <h1 style="margin-top: 60px;" >予約可能日設定</h1>
+      <h1 style="margin-top: 60px;" >受講履歴一覧</h1>
     </div>
     <div class="col-sm-1">
     </div>
   </div>
 
-  <div class="container">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-sm-3" style="text-align; left;">
-
-<?php
-       $lastmonth = mktime(0, 0, 0, date("m",$month) -1, date("d", $month), date("Y",$month));
-       $last = date("Y年m月", $lastmonth);
-   if( $month > time() ){ 
-       echo '<a href="checkday.php?month=' . $lastmonth . '">' . $last. '</a>';
-   } else {
-       echo $last;
-   }
-?>
-    </div>
-    <div class="col-sm-4">
-
-<?php
-   $nowmonth = date("Y年m月", $month);
-   echo $nowmonth;
-?>
-    </div>
-    <div class="col-sm-3">
-
-<?php
-   $nextmonth = mktime(0, 0, 0, date("m",$month) +1, date("d", $month), date("Y",$month));
-   $next = date("Y年m月", $nextmonth);
-   echo '<a href="checkday.php?month=' . $nextmonth . '">' . $next .'</a>';
-?>
-    </div>
-    <div class="col-sm-1">
-    </div>
-  </div>
 
   <div class="container">
     <div class="col-sm-1">
     </div>
     <div class="col-sm-10">
 
-      <?php chk_calender( $month ); ?>
 
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
   </div>
       
