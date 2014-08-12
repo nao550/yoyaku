@@ -129,7 +129,7 @@ if( isset( $_GET['mode'] )){
       <?php chk_calender( $month ); ?>
 
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-1">
     </div>
   </div>
       
