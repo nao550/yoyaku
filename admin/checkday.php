@@ -1,7 +1,6 @@
 <?php
 include '../config.php';
 include '../class.php';
-include 'admin_func.php';
 
 session_start();
 
