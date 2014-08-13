@@ -90,13 +90,16 @@ if( isset( $_GET['mode'] )){
 
 
   <div class="container">
-    <div class="col-sm-1">
+    <div class="col-sm-3">
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-6" style="text-align: left;">
 
+    <input type="radio" name="mode" value="All" >全表示<br />
+    <input type="radio" name="mode" value="Period">期間指定<br />
+    <input type="radio" name="mode" value="Person">受講生指定<br />
 
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-3">
     </div>
   </div>
       
