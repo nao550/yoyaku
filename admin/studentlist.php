@@ -14,22 +14,24 @@ if( isset( $_SESSION['user'])){
     }
 }
 
-if( isset( $_GET['month'] )){
-    $month = h( $_GET['month'] );
-} else {
-    $month = time();
-}
+$mode = "";
+$stid = "";
+$stday = "";
+$edday = "";
 
 if( isset( $_GET['mode'] )){
-    if( $_GET['mode'] == "dateon" ){
-        dateon( h( $_GET['date'] ));
-    } elseif( $_GET['mode'] == "dateoff" ){
-        dateoff( h( $_GET['date'] ));
-    } elseif( $_GET['mode'] == "addon" ){
-        addon( h( $_GET['date'] ));
-    } elseif( $_GET['mode'] == "addoff" ){
-        addoff( h($_GET['date'] ));
+    if( $_GET['mode'] == "All" ){
+        $mode = h( $_GET['mode'] );
+    } elseif( $_GET['mode'] == "Period" ){
+        $mode = h( $_GET['mode'] );
+        $stday = h( $_GET['startday'] );
+        $edday = h( $_GET['endday'] );
+    } elseif( $_GET['mode'] == "Person" ){
+        $mode = h( $_GET['mode'] );
+        $stid = h( $_GET['studentid'] );
     }
+} else {
+   $mode = "All";
 }
 
 
@@ -94,14 +96,36 @@ if( isset( $_GET['mode'] )){
     </div>
     <div class="col-sm-6" style="text-align: left;">
 
-    <input type="radio" name="mode" value="All" >全表示<br />
-    <input type="radio" name="mode" value="Period">期間指定<br />
-    <input type="radio" name="mode" value="Person">受講生指定<br />
-
+      <form action=# method="GET" name="CngMode" >
+	<input type="radio" name="mode" value="All" <?php if( $mode == "All" ){ echo "checked"; } ?>>全表示<br />
+	<input type="radio" name="mode" value="Period" <?php if( $mode == "Period" ){ echo "checked"; } ?>>期間指定 <input type="text" width="15" name="startday">-<input type="text" width="15" name="endday"><br />
+	<input type="radio" name="mode" value="Person" <?php if( $mode == "Person" ){ echo "checked"; } ?>>受講生指定<input type="text" width="15" name="studentid" ><br />
+	<input type="submit" value="変更" >
+      </form>
+      <?php echo $mode; ?>
     </div>
     <div class="col-sm-3">
     </div>
   </div>
+
+  <div class="container">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+      <table class="table table-bordered">
+	<thead>
+	  <tr><th></th><th>学籍場号</th><th>名前</th><th>日付</th><th>時限</th></tr>
+	</thead>
+	<?php Stlistv( $mode, $stid, $stday, $edday); ?>
+	<tbody>
+	</tbody>
+      </table>
+
+    </div>
+    <div class="col-sm-2">
+    </div>
+  </div>    
+
       
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -109,3 +133,10 @@ if( isset( $_GET['mode'] )){
 </body>
 </html>
 
+<?php
+
+function Stlistv( $mode, $stid="", $stday="", $edday="" ){
+   
+}
+
+?>
