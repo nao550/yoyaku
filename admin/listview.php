@@ -106,7 +106,7 @@ if( $DayMode == "TimePeriod" ){
 } else {
     echo date("Y-m-d");
 }
-?>" />-<input type="text" name="EndDay"  value="<?php 
+?>" />-<input type="text" name="EndDay" value="<?php 
 if( $DayMode == "TimePeriod" ){
     echo $EndDay;
 } else {

@@ -14,24 +14,24 @@ if( isset( $_SESSION['user'])){
     }
 }
 
-$mode = "";
-$stid = "";
-$stday = "";
-$edday = "";
+$Mode = "";
+$StartDay = "";
+$EndDay = "";
+$StudentId = "";
 
 if( isset( $_GET['mode'] )){
     if( $_GET['mode'] == "All" ){
-        $mode = h( $_GET['mode'] );
+        $Mode = h( $_GET['mode'] );
     } elseif( $_GET['mode'] == "Period" ){
-        $mode = h( $_GET['mode'] );
-        $stday = h( $_GET['startday'] );
-        $edday = h( $_GET['endday'] );
+        $Mode = h( $_GET['mode'] );
+        $StartDay = h( $_GET['startday'] );
+        $EndDay = h( $_GET['endday'] );
     } elseif( $_GET['mode'] == "Person" ){
-        $mode = h( $_GET['mode'] );
-        $stid = h( $_GET['studentid'] );
+        $Mode = h( $_GET['mode'] );
+        $StudentId = h( $_GET['studentid'] );
     }
 } else {
-   $mode = "All";
+   $Mode = "All";
 }
 
 
@@ -45,14 +45,26 @@ if( isset( $_GET['mode'] )){
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="../css/reset.css">
   <link rel="stylesheet" href="../css/style.css">  
-  <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <!-- Optional theme -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../js/themes/blue/style.css">    
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.tablesorter.js"></script>
+  <script type="text/javascript" src="../js/addons/pager/jquery.tablesorter.pager.js"></script>
+
   <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+            $("#listtable")
+                .tablesorter({widthFixed: true, widgets: ['zebra']})
+                .tablesorterPager({container: $("#paging")});
+    }); 
+  </script>
+
 </head>
 <body>
 
@@ -97,12 +109,30 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-6" style="text-align: left;">
 
       <form action=# method="GET" name="CngMode" >
-	<input type="radio" name="mode" value="All" <?php if( $mode == "All" ){ echo "checked"; } ?>>全表示<br />
-	<input type="radio" name="mode" value="Period" <?php if( $mode == "Period" ){ echo "checked"; } ?>>期間指定 <input type="text" width="15" name="startday">-<input type="text" width="15" name="endday"><br />
-	<input type="radio" name="mode" value="Person" <?php if( $mode == "Person" ){ echo "checked"; } ?>>受講生指定<input type="text" width="15" name="studentid" ><br />
+	<input type="radio" name="mode" value="All" <?php if( $Mode == "All" ){ echo "checked"; } ?>>全表示<br />
+	<input type="radio" name="mode" value="Period" <?php if( $Mode == "Period" ){ echo "checked"; } ?>>期間指定 <input type="text" width="15" name="startday" value="<?php
+if( $Mode == 'Period' ){
+    echo $StartDay ;
+} else {
+    echo date("Y-m-d");
+}
+?>
+">-<input type="text" width="15" name="endday" value="<?php
+if( $Mode == 'Period' ){
+    echo $EndDay;
+} else {
+    echo date("Y-m-d",mktime(0,0,0,date("m"),date("d") + 10, date("Y")));
+}
+?>
+"><br />
+	<input type="radio" name="mode" value="Person" <?php if( $Mode == "Person" ){ echo "checked"; } ?>>学籍番号指定<input type="text" width="15" name="studentid" value="<?php
+if( $Mode == 'Person' ){
+    echo $StudentId;
+}
+?>"><br />
 	<input type="submit" value="変更" >
       </form>
-      <?php echo $mode; ?>
+      <?php echo '<!--'. $Mode . "-->\n"; ?>
     </div>
     <div class="col-sm-3">
     </div>
@@ -112,14 +142,31 @@ if( isset( $_GET['mode'] )){
     <div class="col-sm-2">
     </div>
     <div class="col-sm-8">
-      <table class="table table-bordered">
+      <table id="listtable" class="tablesorter" cellspacing="1">
 	<thead>
-	  <tr><th></th><th>学籍場号</th><th>名前</th><th>日付</th><th>時限</th></tr>
+	  <tr><th>学籍場号</th><th>名前</th><th>日付</th><th>時限</th></tr>
 	</thead>
-	<?php Stlistv( $mode, $stid, $stday, $edday); ?>
+	<?php Stlistv( $Mode, $StudentId, $StartDay, $EndDay ); ?>
 	<tbody>
 	</tbody>
       </table>
+
+      <div id="paging" class="paging" style="float: left;">
+	<form>
+	  <img src="../js/addons/pager/icons/first.png" class="first"/>
+	  <img src="../js/addons/pager/icons/prev.png" class="prev"/>
+	  <input type="text" class="pagedisplay"/>
+	  <img src="../js/addons/pager/icons/next.png" class="next"/>
+	  <img src="../js/addons/pager/icons/last.png" class="last"/>
+	  <select class="pagesize">
+	    <option value="10">10</option>
+	    <option  selected="selected" value="20">20</option>
+	    <option value="30">30</option>
+	    <option value="40">40</option>
+	    <option value="50">50</option>
+	  </select>
+	</form>
+      </div>
 
     </div>
     <div class="col-sm-2">
@@ -127,15 +174,13 @@ if( isset( $_GET['mode'] )){
   </div>    
 
       
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
 
 <?php
 
-function Stlistv( $mode, $stid="", $stday="", $edday="" ){
+function Stlistv( $Mode, $StudentId="", $StartDay="", $EndDay="" ){
     global $DBSV, $DBUSER , $DBPASS , $DBNM, $MAXROWS;
 
     $mysql = new mysqli( "localhost", $DBUSER, $DBPASS, $DBNM );
@@ -144,28 +189,22 @@ function Stlistv( $mode, $stid="", $stday="", $edday="" ){
         exit();
     }
 
-    if( $DayMode == "AllTime" ){
+    if( $Mode == "All" ){
         $sql = "select cd, date, class, studentid, studentnm from yoyaku order by date, class;";
-    } elseif( $DayMode == "Today" ){
-        $sql = "select cd, date, class, studentid, studentnm from yoyaku where date = DATE(NOW()) order by date, class;";
-    } elseif( $DayMode == "TimePeriod" ){
-        $EndDay = $EndDay; // $EndDay にプラス1日する
+    } elseif( $Mode == "Period" ){
         $sql = "select cd, date, class, studentid, studentnm from yoyaku where date >='$StartDay' and date <= '$EndDay' order by date, class;";        
+    } elseif( $Mode == "Person" ){
+        $sql = "select cd, date, class, studentid, studentnm from yoyaku where studentid = '$StudentId' order by date, class;";
     } 
 
     echo "<!-- $sql -->";
     $result = $mysql->query( $sql );
 
-    echo '    <table id="listtable" class="tablesorter" cellspacing="1"><thead>';   echo "\n";
-    echo '      <tr><th>日付</th><th>時限</th><th>学籍番号</th><th>氏名</th><th></th></tr>'; echo "\n</thead><tbody>";
-
     if( $result->num_rows != NULL ){
         while ( $row = $result->fetch_assoc()){
             printf("<tr>");
-            printf("<td>%s</td><td>%d</td><td>%s</td><td>%s</td><td>\n",
-                   $row['date'], $row['class'], $row['studentid'], $row['studentnm']);       
-            printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
-            printf('       </form>' . "\n");
+            printf("<td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>\n",
+                   $row['studentid'], $row['studentnm'], $row['date'], $row['class']);       
         } 
    }
    
