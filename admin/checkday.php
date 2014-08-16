@@ -68,7 +68,8 @@ if( isset( $_GET['mode'] )){
       <div class="collapse navbar-collapse">
 	<ul class="nav navbar-nav">
           <li><a href="../index.php">Home</a></li>
-          <li><a href="listview.php">学生一覧</a></li>
+          <li><a href="listview.php">予約一覧</a></li>
+          <li><a href="studentlist.php">受講履歴</a></li>
 	  <li class="active"><a href="checkday.php">日付設定</a></li>
 	  <li><a href="index.php?mode=destroy">ログオフ</a></li>
 	  <li><a href="../docs/admin/_build/html/index.html">マニュアル</a></li>

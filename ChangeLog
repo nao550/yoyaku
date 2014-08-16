@@ -1,3 +1,14 @@
+2014-08-16  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/studentlist.php: 
+	受講履歴の抽出完成
+
+2014-08-14  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/studentlist.php (if): 
+	学生毎の情報抽出画面の作成
+	範囲選択モードの作成
+
 2014-08-07  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/listview.php: 
