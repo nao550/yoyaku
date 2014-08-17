@@ -1,6 +1,8 @@
 <?php
 include '../config.php';
 include '../class.php';
+require_once 'PHPExcel.php';
+require_once 'PHPExcel/IOFactory.php';
 
 session_start();
 
@@ -18,6 +20,8 @@ if( isset( $_GET['mode'] )){
        $DayMode = h( $_GET['SetTime'] );
        $StartDay = h( $_GET['StartDay'] );
        $EndDay = h( $_GET['EndDay'] );
+   } elseif( $_GET['mode'] == "dlexcel" ){
+       DownLoadExcel();
    }
 } else {
     $DayMode = 'AllTime';
@@ -146,6 +150,11 @@ if( $DayMode == "TimePeriod" ){
 	</form>
       </div>
 
+    <form action="#" method="GET">
+      <input type="hidden" name="mode" value="dlexcel" />
+      <input type="submit" value="DL" >
+    </form>
+      
 
     </div>
     <div class="col-sm-1" >
@@ -196,6 +205,21 @@ if( $DayMode == "TimePeriod" ){
         } 
    }
    echo "    </tbody></table>\n";
+}
+
+
+function DownLoadExcel(){
+    $book = new PHPExcel();
+    $book->setActiveSheetIndex(0);
+    $sheet = $book->getActiveSheet();
+    $sheet->setTitle('一覧');
+
+    $sheet->setCellValue('A1','hoge');
+    $sheet->setCellValue('A2','hage');
+
+    $writer = PHPExcel_IOFactory::createWriter( $book, 'Excel5');
+    $writer->save("o.xlsx");
+
 }
 
 ?>
