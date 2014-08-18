@@ -1,3 +1,12 @@
+2014-08-19  IKENO Naoki  <nao@kyo-to.net>
+
+	* admin/listview.php: 
+	CreateExcel( $result ) を作成して、表示したデータをExcel
+	ダウンロードできるようにした。
+	表示した時点でデータを作成しているので、ダウンロードするときに
+	データをダウンロードするようにしたい
+
+	
 2014-08-16  IKENO Naoki  <nao@kyo-to.net>
 
 	* admin/studentlist.php: 

@@ -150,12 +150,6 @@ if( $DayMode == "TimePeriod" ){
 	</form>
       </div>
 
-    <form action="#" method="GET">
-      <input type="hidden" name="mode" value="dlexcel" />
-      <input type="submit" value="DL" >
-    </form>
-      
-
     </div>
     <div class="col-sm-1" >
     </div>
@@ -206,22 +200,38 @@ if( $DayMode == "TimePeriod" ){
     }
     echo "    </tbody></table>\n";
 
-    CreatExcel( $result );
+    CreateExcel( $result );
+    echo "     <a href=\"list.xlsx\">DL</a>";
 }
 
 
-function CreateExcel(){
+function CreateExcel( $result ){
 
     $book = new PHPExcel();
     $book->setActiveSheetIndex(0);
     $sheet = $book->getActiveSheet();
     $sheet->setTitle('list');
 
-    $sheet->setCellValue('A1','hoge');
-    $sheet->setCellValue('A2','hage');
+    $result->data_seek(0);
+    $n = 2;
 
+    $sheet->setCellValue('A1', '日付');
+    $sheet->setCellValue('B1', '時限');
+    $sheet->setCellValue('C1', '学籍番号');
+    $sheet->setCellValue('D1', '名前');
+
+    if( $result->num_rows != NULL ){
+        while ( $row = $result->fetch_assoc()){
+            $sheet->setCellValue('A'.$n , $row['date'] );
+            $sheet->setCellValue('B'.$n , $row['class'] );
+            $sheet->setCellValue('C'.$n , $row['studentid'] );
+            $sheet->setCellValue('D'.$n , $row['studentnm']);
+            $n = $n + 1;
+        }
+    }
+    
     $writer = PHPExcel_IOFactory::createWriter( $book, 'Excel2007');
-    $writer->save('./o.xlsx');
+    $writer->save('./list.xlsx');
 
 }
 
