@@ -20,8 +20,8 @@ if( isset( $_GET['mode'] )){
        $DayMode = h( $_GET['SetTime'] );
        $StartDay = h( $_GET['StartDay'] );
        $EndDay = h( $_GET['EndDay'] );
-   } elseif( $_GET['mode'] == "dlexcel" ){
-       DownLoadExcel();
+       //   } elseif( $_GET['mode'] == "dlexcel" ){
+       //       DownLoadExcel();
    }
 } else {
     $DayMode = 'AllTime';
@@ -203,22 +203,25 @@ if( $DayMode == "TimePeriod" ){
             printf('         <a href="cancelitem.php?mode=del&cd=' . $row['cd'] . '&date=' . $row['date'] . '&class=' . $row['class'] . '&id=' . $row['studentid'] . '&nm=' . $row['studentnm'] . '"><input class="btn btn-xs btn-default" type="submit" value="削除" /></a></td></tr>' . "\n");
             printf('       </form>' . "\n");
         } 
-   }
-   echo "    </tbody></table>\n";
+    }
+    echo "    </tbody></table>\n";
+
+    CreatExcel( $result );
 }
 
 
-function DownLoadExcel(){
+function CreateExcel(){
+
     $book = new PHPExcel();
     $book->setActiveSheetIndex(0);
     $sheet = $book->getActiveSheet();
-    $sheet->setTitle('一覧');
+    $sheet->setTitle('list');
 
     $sheet->setCellValue('A1','hoge');
     $sheet->setCellValue('A2','hage');
 
-    $writer = PHPExcel_IOFactory::createWriter( $book, 'Excel5');
-    $writer->save("o.xlsx");
+    $writer = PHPExcel_IOFactory::createWriter( $book, 'Excel2007');
+    $writer->save('./o.xlsx');
 
 }
 
