@@ -201,7 +201,7 @@ if( $DayMode == "TimePeriod" ){
     echo "    </tbody></table>\n";
 
     CreateExcel( $result );
-    echo "     <a href=\"list.xlsx\">DL</a>";
+    echo "     <a href=\"list.xlsx\">Excelデータダウンロード</a>";
 }
 
 
